@@ -1,2 +1,2 @@
 # OpenTripPlanner-client-gwt
-GWT client for OpenTripPlaner
+GWT client for OpenTripPlanner
