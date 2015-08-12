@@ -86,7 +86,7 @@ public class GeocoderMultiplexer implements GeocoderProxy {
 		 */
 		final MultiplexedReverseGeocoderRequest mux = new MultiplexedReverseGeocoderRequest();
 		mux.n = subProxies.size();
-		mux.bestFactor = 0;
+		mux.bestFactor = Integer.MIN_VALUE;
 		mux.bestLocation = null;
 		for (GeocoderProxy subProxy : subProxies) {
 			subProxy.reverseGeocode(location, new ReverseGeocoderListener() {

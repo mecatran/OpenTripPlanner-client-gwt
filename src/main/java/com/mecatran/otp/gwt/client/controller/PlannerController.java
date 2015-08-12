@@ -47,6 +47,7 @@ import com.mecatran.otp.gwt.client.proxies.POISource.POIListener;
 import com.mecatran.otp.gwt.client.proxies.TransitPlannerProxy;
 import com.mecatran.otp.gwt.client.proxies.TransitPlannerProxy.TransitPlannerListener;
 import com.mecatran.otp.gwt.client.proxies.dummy.LatLngGeocoder;
+import com.mecatran.otp.gwt.client.proxies.otp.OtpGeocoderProxy;
 import com.mecatran.otp.gwt.client.proxies.otp.OtpPlannerProxy;
 import com.mecatran.otp.gwt.client.utils.FormatUtils;
 import com.mecatran.otp.gwt.client.view.PlannerWidget;
@@ -75,15 +76,7 @@ public class PlannerController implements PlannerWidgetListener,
 		I18nUtils.setLocale(config.getLang());
 		FormatUtils.setTimeFormat(I18nUtils.tr("time.format.small"));
 		FormatUtils.setDateFormat(I18nUtils.tr("date.format.small"));
-		if (config.getProxyType().equals(PlannerWidgetConfig.PROXY_OTP)) {
-			plannerProxy = new OtpPlannerProxy(config.getOtpUrl(),
-					config.getRouterId(), config.getMaxItineraries());
-			plannerProxy.setTransitPlannerListener(this);
-		} else {
-			Window.alert("Invalid proxy type: " + config.getProxyType());
-			throw new RuntimeException("Invalid proxy type: "
-					+ config.getProxyType());
-		}
+
 		ModeCapabilitiesBean modeCapabilities = getModeCapabilitiesFromConfig(config);
 		PlannerWidgetImpl theWidget = new PlannerWidgetImpl(modeCapabilities);
 		plannerWidget = theWidget;
@@ -179,6 +172,17 @@ public class PlannerController implements PlannerWidgetListener,
 
 	private void buildProxiesFromConfiguration(PlannerWidgetConfig config) {
 
+		/* Planner proxy */
+		if (config.getProxyType().equals(PlannerWidgetConfig.PROXY_OTP)) {
+			plannerProxy = new OtpPlannerProxy(config.getOtpUrl(),
+					config.getRouterId(), config.getMaxItineraries());
+			plannerProxy.setTransitPlannerListener(this);
+		} else {
+			Window.alert("Invalid proxy type: " + config.getProxyType());
+			throw new RuntimeException("Invalid proxy type: "
+					+ config.getProxyType());
+		}
+
 		/* Alert sources */
 		// TODO Configure
 		// alertsSourceProxy = new XyzAlertsSourceProxy();
@@ -197,11 +201,16 @@ public class PlannerController implements PlannerWidgetListener,
 		// TODO Configure
 		// poiSources.add(new XyzPOISource());
 
-		/* Geocoders */
+		/* Geocoder(s) */
 		GeocoderMultiplexer geocoderMultiplexer = new GeocoderMultiplexer();
-		// By default add an address geocoder
-		// TODO Implement OSM Nominatim geocoder
-		geocoderMultiplexer.addGeocoder(new LatLngGeocoder());
+		if (config.getProxyType().equals(PlannerWidgetConfig.PROXY_OTP)) {
+			geocoderMultiplexer.addGeocoder(new OtpGeocoderProxy(config
+					.getOtpUrl(), config.getRouterId()));
+		} else {
+			// TODO Implement OSM Nominatim geocoder
+			// Poor man fallback: use a lat,lng dummy geocoder
+			geocoderMultiplexer.addGeocoder(new LatLngGeocoder());
+		}
 		// Add a geocoder for each POI source
 		for (POISource poiSource : poiSources) {
 			// TODO Configure "useBounds" if needed. How?
