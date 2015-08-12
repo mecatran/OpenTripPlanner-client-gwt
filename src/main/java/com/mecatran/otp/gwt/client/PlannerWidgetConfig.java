@@ -61,22 +61,22 @@ public class PlannerWidgetConfig extends JavaScriptObject {
 
 	public final native double getMinLat()
 	/*-{
-		return this.minLat;
+		return this.minLat || NaN;
 	}-*/;
 
 	public final native double getMinLon()
 	/*-{
-		return this.minLon;
+		return this.minLon || NaN;
 	}-*/;
 
 	public final native double getMaxLat()
 	/*-{
-		return this.maxLat;
+		return this.maxLat || NaN;
 	}-*/;
 
 	public final native double getMaxLon()
 	/*-{
-		return this.maxLon;
+		return this.maxLon || NaN;
 	}-*/;
 
 	/**
@@ -97,11 +97,11 @@ public class PlannerWidgetConfig extends JavaScriptObject {
 
 	/**
 	 * @return The base URL of the OTP server. Default to
-	 *         "//localhost:8080/otp/".
+	 *         "//localhost:8080/otp".
 	 */
 	public final native String getOtpUrl()
 	/*-{
-		return this.otpUrl || "//localhost:8080/otp/";
+		return this.otpUrl || "//localhost:8080/otp";
 	}-*/;
 
 	public final native boolean isHasTransit()

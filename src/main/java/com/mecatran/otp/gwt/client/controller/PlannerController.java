@@ -60,6 +60,7 @@ import com.mecatran.otp.gwt.client.view.PrintWidgetWindowImpl;
 public class PlannerController implements PlannerWidgetListener,
 		PrintWidgetListener, TransitPlannerListener {
 
+	private PlannerWidgetConfig config;
 	private PlannerWidget plannerWidget;
 	private PrintWidget printWidget;
 	private TransitPlannerProxy plannerProxy;
@@ -68,11 +69,11 @@ public class PlannerController implements PlannerWidgetListener,
 	private List<POISource> poiSources;
 	private ReverseGeocoderListener startAddressReverseGeocoderListener;
 	private ReverseGeocoderListener endAddressReverseGeocoderListener;
-	private Wgs84BoundsBean bounds;
 	private boolean busyPlanning = false;
 	private int autoPlanAfterGeocode = 0;
 
 	public PlannerController(PlannerWidgetConfig config) {
+		this.config = config;
 		I18nUtils.setLocale(config.getLang());
 		FormatUtils.setTimeFormat(I18nUtils.tr("time.format.small"));
 		FormatUtils.setDateFormat(I18nUtils.tr("date.format.small"));
@@ -122,13 +123,17 @@ public class PlannerController implements PlannerWidgetListener,
 					planRouteIfPossible();
 			}
 		};
-		bounds = new Wgs84BoundsBean();
-		bounds.extend(new Wgs84LatLonBean(config.getMinLat(), config
-				.getMinLon()));
-		bounds.extend(new Wgs84LatLonBean(config.getMaxLat(), config
-				.getMaxLon()));
-		plannerWidget.setBounds(bounds);
-		geocoderProxy.configure(bounds, config.getMainCountryName());
+		if (!Double.isNaN(config.getMinLat())
+				&& !Double.isNaN(config.getMinLon())
+				&& !Double.isNaN(config.getMaxLat())
+				&& !Double.isNaN(config.getMaxLon())) {
+			Wgs84BoundsBean bounds = new Wgs84BoundsBean();
+			bounds.extend(new Wgs84LatLonBean(config.getMinLat(), config
+					.getMinLon()));
+			bounds.extend(new Wgs84LatLonBean(config.getMaxLat(), config
+					.getMaxLon()));
+			setBounds(bounds);
+		}
 		plannerWidget.switchMapBackground(plannerWidget.getPlanRequestBean()
 				.getModes());
 	}
@@ -140,9 +145,7 @@ public class PlannerController implements PlannerWidgetListener,
 	public void restoreState(PlannerState state) {
 		PlanRequestBean planRequestBean = state.getPlanRequestBean();
 		LocationBean departure = planRequestBean.getDeparture();
-		if (departure != null
-				&& (departure.getLocation() == null || bounds
-						.contains(departure.getLocation()))) {
+		if (departure != null) {
 			plannerWidget.setStartLocation(departure, false);
 			autoPlanAfterGeocode++;
 			// Reverse geocode if needed
@@ -151,9 +154,7 @@ public class PlannerController implements PlannerWidgetListener,
 			}
 		}
 		LocationBean arrival = planRequestBean.getArrival();
-		if (arrival != null
-				&& (arrival.getLocation() == null || bounds.contains(arrival
-						.getLocation()))) {
+		if (arrival != null) {
 			plannerWidget.setEndLocation(arrival, false);
 			autoPlanAfterGeocode++;
 			// Reverse geocode if needed
@@ -174,9 +175,8 @@ public class PlannerController implements PlannerWidgetListener,
 
 		/* Planner proxy */
 		if (config.getProxyType().equals(PlannerWidgetConfig.PROXY_OTP)) {
-			plannerProxy = new OtpPlannerProxy(config.getOtpUrl(),
+			plannerProxy = new OtpPlannerProxy(this, config.getOtpUrl(),
 					config.getRouterId(), config.getMaxItineraries());
-			plannerProxy.setTransitPlannerListener(this);
 		} else {
 			Window.alert("Invalid proxy type: " + config.getProxyType());
 			throw new RuntimeException("Invalid proxy type: "
@@ -228,9 +228,15 @@ public class PlannerController implements PlannerWidgetListener,
 		modeCapabilities.setHasBikeAndTransit(config.isHasBikeAndTransit());
 		modeCapabilities.setHasBikeRental(config.isHasBikeRental());
 		if (config.getProxyType().equals(PlannerWidgetConfig.PROXY_OTP)) {
+			// TODO This should be returned by the proxy itself
 			modeCapabilities.setHasAdvancedOptions(true);
 		}
 		return modeCapabilities;
+	}
+
+	private void setBounds(Wgs84BoundsBean bounds) {
+		plannerWidget.setBounds(bounds);
+		geocoderProxy.configure(bounds, config.getMainCountryName());
 	}
 
 	/* === PlannerWidgetListener === */
@@ -365,7 +371,18 @@ public class PlannerController implements PlannerWidgetListener,
 	}
 
 	@Override
+	public void onPlannerConfigured(Wgs84BoundsBean bounds,
+			ModeCapabilitiesBean modeCapabilities) {
+		if (bounds != null) {
+			setBounds(bounds);
+		}
+		// TODO Handle modeCapabilities.
+	}
+
+	/* === PrintWidgetListener === */
+
+	@Override
 	public void onPrintDone() {
-		// Nothing
+
 	}
 }

@@ -84,7 +84,7 @@ public class OtpGeocoderProxy implements GeocoderProxy {
 
 	private String buildQueryUrl(String query) {
 		StringBuffer sb = new StringBuffer(baseUrl);
-		sb.append("routers/").append(routerId).append("/geocode?query=")
+		sb.append("/routers/").append(routerId).append("/geocode?query=")
 				.append(query);
 		return sb.toString();
 	}

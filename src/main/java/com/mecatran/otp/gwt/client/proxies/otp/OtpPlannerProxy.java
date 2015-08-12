@@ -33,6 +33,7 @@ import com.mecatran.otp.gwt.client.model.ItineraryLegBean;
 import com.mecatran.otp.gwt.client.model.ItineraryRoadLegBean;
 import com.mecatran.otp.gwt.client.model.ItineraryRoadStepBean;
 import com.mecatran.otp.gwt.client.model.ItineraryTransitLegBean;
+import com.mecatran.otp.gwt.client.model.ModeCapabilitiesBean;
 import com.mecatran.otp.gwt.client.model.PlanRequestBean;
 import com.mecatran.otp.gwt.client.model.RelativeDirection;
 import com.mecatran.otp.gwt.client.model.TransitRouteBean;
@@ -53,19 +54,17 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 	private String mainCountryName;
 	private int maxItineraries = 3;
 
-	public OtpPlannerProxy(String baseUrl, String routerId, int maxItineraries) {
+	public OtpPlannerProxy(TransitPlannerListener plannerListener,
+			String baseUrl, String routerId, int maxItineraries) {
+		this.plannerListener = plannerListener;
 		this.baseUrl = baseUrl;
 		this.routerId = routerId;
+		getConfig();
 	}
 
 	@Override
 	public boolean isRequireGeocoding() {
 		return true;
-	}
-
-	@Override
-	public void setTransitPlannerListener(TransitPlannerListener listener) {
-		plannerListener = listener;
 	}
 
 	@Override
@@ -100,6 +99,38 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 			@Override
 			public void onFailure(String msg) {
 				plannerListener.onItineraryError(msg);
+			}
+		});
+	}
+
+	private void getConfig() {
+
+		String url = buildConfUrl();
+		HttpUtils.downloadJson(url, new DownloadListener<OtpRouterConf>() {
+
+			@Override
+			public void onSuccess(OtpRouterConf otpRouterConf) {
+				Wgs84BoundsBean bounds = new Wgs84BoundsBean();
+				bounds.extend(new Wgs84LatLonBean(otpRouterConf
+						.getLowerLeftLatitude(), otpRouterConf
+						.getLowerLeftLongitude()));
+				bounds.extend(new Wgs84LatLonBean(otpRouterConf
+						.getUpperRightLatitude(), otpRouterConf
+						.getUpperRightLongitude()));
+				ModeCapabilitiesBean modeCapabilities = new ModeCapabilitiesBean();
+				modeCapabilities.setHasAdvancedOptions(true);
+				modeCapabilities.setHasTransit(otpRouterConf.getTransitModes()
+						.length() > 0);
+				// TODO How do we know that?
+				modeCapabilities.setHasBikeAndTransit(true);
+				modeCapabilities.setHasBikeRental(true);
+				modeCapabilities.setHasWalkOnly(true);
+				plannerListener.onPlannerConfigured(bounds, modeCapabilities);
+			}
+
+			@Override
+			public void onFailure(String msg) {
+				// Ignore
 			}
 		});
 	}
@@ -342,11 +373,15 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 		return null;
 	}
 
+	private String buildConfUrl() {
+		return baseUrl + "/routers/" + routerId;
+	}
+
 	private String buildGetUrl(PlanRequestBean planRequest) {
 		// TODO We can't easily use the GWT UrlBuilder class,
 		// as we would need to parse the provided base URL...
 		StringBuffer sb = new StringBuffer(baseUrl);
-		sb.append("routers/").append(routerId).append("/plan");
+		sb.append("/routers/").append(routerId).append("/plan");
 		Wgs84LatLonBean departure = planRequest.getDeparture().getLocation();
 		Wgs84LatLonBean arrival = planRequest.getArrival().getLocation();
 		sb.append("?fromPlace=");

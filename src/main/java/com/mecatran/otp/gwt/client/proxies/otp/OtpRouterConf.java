@@ -16,27 +16,48 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
    ------------------------------------------------------------------------- */
-package com.mecatran.otp.gwt.client.proxies;
+package com.mecatran.otp.gwt.client.proxies.otp;
 
-import java.util.List;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayString;
 
-import com.mecatran.otp.gwt.client.model.ItineraryBean;
-import com.mecatran.otp.gwt.client.model.ModeCapabilitiesBean;
-import com.mecatran.otp.gwt.client.model.PlanRequestBean;
-import com.mecatran.otp.gwt.client.model.Wgs84BoundsBean;
+public class OtpRouterConf extends JavaScriptObject {
 
-public interface TransitPlannerProxy {
-
-	public interface TransitPlannerListener {
-
-		public void onItineraryFound(List<ItineraryBean> itineraries);
-
-		public void onItineraryError(String errorMessage);
-
-		public void onPlannerConfigured(Wgs84BoundsBean bounds, ModeCapabilitiesBean modeCapabilities);
+	protected OtpRouterConf() {
 	}
 
-	public boolean isRequireGeocoding();
+	protected final native double getRouterId()
+	/*-{
+		return this.routerId;
+	}-*/;
 
-	public void planRoute(final PlanRequestBean planRequest);
+	protected final native double getBuildTime()
+	/*-{
+		return this.buildTime;
+	}-*/;
+
+	protected final native JsArrayString getTransitModes()
+	/*-{
+		return this.transitModes;
+	}-*/;
+
+	protected final native double getLowerLeftLatitude()
+	/*-{
+		return this.lowerLeftLatitude;
+	}-*/;
+
+	protected final native double getLowerLeftLongitude()
+	/*-{
+		return this.lowerLeftLongitude;
+	}-*/;
+
+	protected final native double getUpperRightLatitude()
+	/*-{
+		return this.upperRightLatitude;
+	}-*/;
+
+	protected final native double getUpperRightLongitude()
+	/*-{
+		return this.upperRightLongitude;
+	}-*/;
 }
