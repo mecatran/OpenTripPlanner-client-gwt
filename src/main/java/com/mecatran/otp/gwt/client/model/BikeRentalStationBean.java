@@ -18,11 +18,14 @@
    ------------------------------------------------------------------------- */
 package com.mecatran.otp.gwt.client.model;
 
+import com.mecatran.otp.gwt.client.i18n.I18nUtils;
+
 public class BikeRentalStationBean extends POIBean {
 
 	private Integer totalCapacity;
 	private Integer bikesAvailable;
 	private Integer slotsAvailable;
+	private boolean hasRealTime;
 
 	public BikeRentalStationBean() {
 		setType(POIType.TRANSPORT_BIKE_RENTAL_STATION);
@@ -34,6 +37,10 @@ public class BikeRentalStationBean extends POIBean {
 
 	public void setTotalCapacity(Integer totalCapacity) {
 		this.totalCapacity = totalCapacity;
+	}
+
+	public void setHasRealTime(boolean hasRealTime) {
+		this.hasRealTime = hasRealTime;
 	}
 
 	public Integer getBikesAvailable() {
@@ -55,17 +62,15 @@ public class BikeRentalStationBean extends POIBean {
 	@Override
 	public String getHtmlDescription() {
 		String s = "<h3>" + getName() + "</h3>";
-		// TODO i18n
 		if (totalCapacity != null)
-			s = s + "<p><b>Total capacity</b>: " + totalCapacity + "</p>";
-		/*
-		 * TODO OTP always return slots/bikes availability, even when bogus
-		 * (static OSM node).
-		 */
-		// if (slotsAvailable != null)
-		// s = s + "<p><b>Free slots</b>: " + slotsAvailable + "</p>";
-		// if (bikesAvailable != null)
-		// s = s + "<p><b>Bikes availables</b>: " + bikesAvailable + "</p>";
+			s = s + "<p><b>" + I18nUtils.tr("bikeshare.capacity") + "</b>: "
+					+ totalCapacity + "</p>";
+		if (hasRealTime && bikesAvailable != null)
+			s = s + "<p><b>" + I18nUtils.tr("bikeshare.bikes.avail") + "</b>: "
+					+ bikesAvailable + "</p>";
+		if (hasRealTime && slotsAvailable != null)
+			s = s + "<p><b>" + I18nUtils.tr("bikeshare.slots.avail") + "</b>: "
+					+ slotsAvailable + "</p>";
 		return s;
 	}
 

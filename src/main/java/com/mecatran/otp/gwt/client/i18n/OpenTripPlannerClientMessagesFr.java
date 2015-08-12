@@ -108,6 +108,9 @@ public class OpenTripPlannerClientMessagesFr extends
 				"Adresse introuvable. Veuillez saisir une adresse valide ou sélectionner un point sur la carte.");
 		add("several.address.matches",
 				"Plusieurs adresse correspondent. Veuillez en sélectionner une dans la liste ci-dessous:");
+		add("bikeshare.capacity", "Capacité totale");
+		add("bikeshare.bikes.avail", "Vélos disponibles");
+		add("bikeshare.slots.avail", "Places disponibles");
 		add("stay.on", "Rester sur <b>{0}</b>");
 		add("reldir.Continue", "Continuer sur <b>{0}</b>");
 		add("reldir.Elevator", "Prendre l'ascenseur");

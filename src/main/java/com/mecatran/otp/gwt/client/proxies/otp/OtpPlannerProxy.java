@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.mecatran.otp.gwt.client.i18n.I18nUtils;
@@ -423,7 +422,7 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 				planRequest.getWalkReluctanceFactor());
 		sb.append("&numItineraries=").append(maxItineraries);
 		String retval = sb.toString();
-		GWT.log("OTP request URL: " + retval);
+		// GWT.log("OTP request URL: " + retval);
 		return retval;
 	}
 

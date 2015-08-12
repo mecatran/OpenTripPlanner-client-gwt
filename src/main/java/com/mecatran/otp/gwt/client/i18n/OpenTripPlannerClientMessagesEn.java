@@ -107,6 +107,9 @@ public class OpenTripPlannerClientMessagesEn extends
 				"Address not found. Please type a valid address or select a point on the map");
 		add("several.address.matches",
 				"Several addresses matches. Please select one in the list below:");
+		add("bikeshare.capacity", "Total capacity");
+		add("bikeshare.bikes.avail", "Bikes available");
+		add("bikeshare.slots.avail", "Slots available");
 		add("stay.on", "Stay on <b>{0}</b>");
 		add("reldir.Continue", "Continue on <b>{0}</b>");
 		add("reldir.Elevator", "Take the elevator");

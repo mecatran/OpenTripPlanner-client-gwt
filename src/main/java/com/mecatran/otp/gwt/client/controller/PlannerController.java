@@ -47,6 +47,7 @@ import com.mecatran.otp.gwt.client.proxies.POISource.POIListener;
 import com.mecatran.otp.gwt.client.proxies.TransitPlannerProxy;
 import com.mecatran.otp.gwt.client.proxies.TransitPlannerProxy.TransitPlannerListener;
 import com.mecatran.otp.gwt.client.proxies.dummy.LatLngGeocoder;
+import com.mecatran.otp.gwt.client.proxies.otp.OtpBikeRentalProxy;
 import com.mecatran.otp.gwt.client.proxies.otp.OtpGeocoderProxy;
 import com.mecatran.otp.gwt.client.proxies.otp.OtpPlannerProxy;
 import com.mecatran.otp.gwt.client.utils.FormatUtils;
@@ -84,6 +85,7 @@ public class PlannerController implements PlannerWidgetListener,
 		// Use the "external window" print form
 		printWidget = new PrintWidgetWindowImpl(null);
 		printWidget.setPrintWidgetListener(this);
+
 		buildProxiesFromConfiguration(config);
 		for (POISource poiSource : poiSources) {
 			poiSource.addListener(new POIListener() {
@@ -189,9 +191,8 @@ public class PlannerController implements PlannerWidgetListener,
 		/* Bike rental sources */
 		if (config.getProxyType().equals(PlannerWidgetConfig.PROXY_OTP)
 				&& config.isHasBikeRental()) {
-			// TODO
-			// poiSources.add(new OtpBikeRentalPoiSource(config.getOtpUrl(),
-			// config.getRouterId()));
+			poiSources.add(new OtpBikeRentalProxy(config.getOtpUrl(), config
+					.getRouterId()));
 		}
 
 		/* POIs sources */

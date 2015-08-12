@@ -22,6 +22,11 @@ import java.util.Map;
 
 import com.mecatran.otp.gwt.client.model.POIBean;
 
+/*
+ * TODO Currently there is no guarantee that we won't add a new listener *after* the POIs
+ * have been loaded and the listener callback called. In that case clarify the semantics:
+ * should we call the callback with the cached list of POIs from the source?
+ */
 public interface POISource {
 
 	public interface POIListener {
