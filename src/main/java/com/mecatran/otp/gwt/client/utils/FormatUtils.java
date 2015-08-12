@@ -82,11 +82,7 @@ public class FormatUtils {
 	 * @return The address, formatted.
 	 */
 	public static String formatAddress(String address) {
-		int i = address.indexOf(',');
-		if (i == -1)
-			return address;
-		return address.substring(0, i)
-				+ smallerFont(address.substring(i, address.length()));
+		return address;
 	}
 
 	/**
@@ -96,37 +92,7 @@ public class FormatUtils {
 	 */
 	public static String[] formatAddresses(String startAddress,
 			String endAddress) {
-		int i1 = startAddress.length() - 1;
-		int j1 = endAddress.length() - 1;
-		while (i1 > 0 && j1 > 0
-				&& startAddress.charAt(i1) == endAddress.charAt(j1)) {
-			i1--;
-			j1--;
-		}
-		i1++;
-		j1++;
-		while (i1 < startAddress.length() - 1 && j1 < endAddress.length() - 1
-				&& startAddress.charAt(i1) != ',') {
-			i1++;
-			j1++;
-		}
-		int i2 = startAddress.indexOf(',');
-		if (i2 == -1)
-			i2 = startAddress.length();
-		if (i2 > i1)
-			i2 = i1;
-		int j2 = endAddress.indexOf(',');
-		if (j2 == -1)
-			j2 = endAddress.length();
-		if (j2 > j1)
-			j2 = j1;
-		return new String[] {
-				startAddress.substring(0, i2)
-						+ (i2 < i1 ? smallerFont(startAddress.substring(i2, i1))
-								: ""),
-				endAddress.substring(0, j2)
-						+ (j2 < endAddress.length() ? smallerFont(endAddress
-								.substring(j2, endAddress.length())) : "") };
+		return new String[] { startAddress, endAddress };
 	}
 
 	/**
