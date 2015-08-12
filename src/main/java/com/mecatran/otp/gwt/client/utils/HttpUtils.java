@@ -62,8 +62,7 @@ public class HttpUtils {
 		try {
 			RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 			builder.setTimeoutMillis(timeoutMs);
-			// TODO: Forcing the content-type make certain API fails...
-			// builder.setHeader("Content-type", contentType);
+			builder.setHeader("Accept", contentType);
 			builder.sendRequest(null, new RequestCallback() {
 
 				public void onError(Request request, Throwable exception) {
