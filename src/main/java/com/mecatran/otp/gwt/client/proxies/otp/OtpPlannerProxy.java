@@ -23,13 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
-import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.mecatran.otp.gwt.client.i18n.I18nUtils;
@@ -47,11 +41,11 @@ import com.mecatran.otp.gwt.client.model.TransportMode;
 import com.mecatran.otp.gwt.client.model.Wgs84BoundsBean;
 import com.mecatran.otp.gwt.client.model.Wgs84LatLonBean;
 import com.mecatran.otp.gwt.client.proxies.TransitPlannerProxy;
+import com.mecatran.otp.gwt.client.utils.HttpUtils;
+import com.mecatran.otp.gwt.client.utils.HttpUtils.DownloadListener;
 import com.mecatran.otp.gwt.client.utils.PolylineEncoder;
 
 public class OtpPlannerProxy implements TransitPlannerProxy {
-
-	private static final int TIMEOUT_MS = 10000;
 
 	private TransitPlannerListener plannerListener;
 	private String baseUrl;
@@ -77,51 +71,37 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 	@Override
 	public void planRoute(final PlanRequestBean planRequest) {
 
-		try {
-			String url = buildGetUrl(planRequest);
-			RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
-			builder.setTimeoutMillis(TIMEOUT_MS);
-			builder.sendRequest(null, new RequestCallback() {
-				public void onError(Request request, Throwable exception) {
-					plannerListener.onItineraryError(exception
-							.getLocalizedMessage());
-				}
+		String url = buildGetUrl(planRequest);
+		HttpUtils.downloadJson(url, new DownloadListener<OtpPlannerResponse>() {
 
-				public void onResponseReceived(Request request,
-						Response response) {
-					if (200 == response.getStatusCode()) {
-						OtpPlannerResponse otpResponse = JsonUtils
-								.<OtpPlannerResponse> safeEval(response
-										.getText());
-						OtpError otpError = otpResponse.getError();
-						if (otpError != null) {
-							plannerListener.onItineraryError(otpError.getMsg()
-									+ " (" + otpError.getId() + ")");
-						} else {
-							List<ItineraryBean> itineraries = new ArrayList<ItineraryBean>();
-							for (int i = 0; i < otpResponse.getItineraries()
-									.length(); i++) {
-								itineraries.add(convert(otpResponse
-										.getItineraries().get(i), planRequest));
-							}
-							for (ItineraryBean itinerary : itineraries) {
-								itinerary.setStartAddress(humanize(planRequest
-										.getDeparture().getAddress()));
-								itinerary.setEndAddress(humanize(planRequest
-										.getArrival().getAddress()));
-								itinerary.setRequest(planRequest);
-							}
-							plannerListener.onItineraryFound(itineraries);
-						}
-					} else {
-						plannerListener.onItineraryError(response
-								.getStatusText());
+			@Override
+			public void onSuccess(OtpPlannerResponse otpResponse) {
+				OtpError otpError = otpResponse.getError();
+				if (otpError != null) {
+					plannerListener.onItineraryError(otpError.getMsg() + " ("
+							+ otpError.getId() + ")");
+				} else {
+					List<ItineraryBean> itineraries = new ArrayList<ItineraryBean>();
+					for (int i = 0; i < otpResponse.getItineraries().length(); i++) {
+						itineraries.add(convert(otpResponse.getItineraries()
+								.get(i), planRequest));
 					}
+					for (ItineraryBean itinerary : itineraries) {
+						itinerary.setStartAddress(humanize(planRequest
+								.getDeparture().getAddress()));
+						itinerary.setEndAddress(humanize(planRequest
+								.getArrival().getAddress()));
+						itinerary.setRequest(planRequest);
+					}
+					plannerListener.onItineraryFound(itineraries);
 				}
-			});
-		} catch (RequestException e1) {
-			plannerListener.onItineraryError(e1.getLocalizedMessage());
-		}
+			}
+
+			@Override
+			public void onFailure(String msg) {
+				plannerListener.onItineraryError(msg);
+			}
+		});
 	}
 
 	private ItineraryBean convert(OtpItinerary otpiti,

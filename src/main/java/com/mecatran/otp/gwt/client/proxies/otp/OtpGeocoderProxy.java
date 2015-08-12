@@ -22,17 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.core.client.JsonUtils;
-import com.google.gwt.core.shared.GWT;
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
-import com.google.gwt.http.client.Response;
 import com.mecatran.otp.gwt.client.model.LocationBean;
 import com.mecatran.otp.gwt.client.model.Wgs84BoundsBean;
 import com.mecatran.otp.gwt.client.model.Wgs84LatLonBean;
 import com.mecatran.otp.gwt.client.proxies.GeocoderProxy;
+import com.mecatran.otp.gwt.client.utils.HttpUtils;
+import com.mecatran.otp.gwt.client.utils.HttpUtils.DownloadListener;
 
 public class OtpGeocoderProxy implements GeocoderProxy {
 
@@ -51,20 +46,12 @@ public class OtpGeocoderProxy implements GeocoderProxy {
 
 	@Override
 	public void geocode(String address, final GeocoderListener listener) {
-		try {
-			String url = buildQueryUrl(address);
-			RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
-			builder.sendRequest(null, new RequestCallback() {
-				public void onError(Request request, Throwable exception) {
-					listener.onGeocodingDone(null);
-				}
+		String url = buildQueryUrl(address);
+		HttpUtils.downloadJson(url,
+				new DownloadListener<JsArray<OtpGeocodingResult>>() {
 
-				public void onResponseReceived(Request request,
-						Response response) {
-					if (200 == response.getStatusCode()) {
-						JsArray<OtpGeocodingResult> results = JsonUtils
-								.<JsArray<OtpGeocodingResult>> safeEval(response
-										.getText());
+					@Override
+					public void onSuccess(JsArray<OtpGeocodingResult> results) {
 						List<LocationBean> locations = new ArrayList<>(results
 								.length());
 						for (int i = 0; i < results.length(); i++) {
@@ -76,14 +63,13 @@ public class OtpGeocoderProxy implements GeocoderProxy {
 							locations.add(location);
 						}
 						listener.onGeocodingDone(locations);
-					} else {
+					}
+
+					@Override
+					public void onFailure(String msg) {
 						listener.onGeocodingDone(null);
 					}
-				}
-			});
-		} catch (RequestException e1) {
-			listener.onGeocodingDone(null);
-		}
+				});
 	}
 
 	@Override
@@ -100,8 +86,6 @@ public class OtpGeocoderProxy implements GeocoderProxy {
 		StringBuffer sb = new StringBuffer(baseUrl);
 		sb.append("routers/").append(routerId).append("/geocode?query=")
 				.append(query);
-		String retval = sb.toString();
-		GWT.log("OTP geocode URL: " + retval);
-		return retval;
+		return sb.toString();
 	}
 }
