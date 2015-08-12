@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="OpenTripPlannerClient">
+    <inherits name="com.google.gwt.user.User" />
+    <inherits name="com.google.gwt.i18n.I18N" />
+    <inherits name='org.gwtopenmaps.openlayers.OpenLayers' />
+    <inherits name='com.google.gwt.user.theme.chrome.Chrome' />
+    <inherits name="com.google.gwt.resources.Resources" />
+    <inherits name="com.google.gwt.http.HTTP" />
+    <inherits name="com.google.gwt.xml.XML" />
+    <inherits name="com.google.gwt.json.JSON" />
+    <add-linker name="xsiframe" />
+    <source path="client" />
+    <entry-point class="com.mecatran.otp.gwt.client.PlannerWidgetEntryPoint" />
+    <!-- <extend-property name="locale" values="en" /> -->
+    <!-- <extend-property name="locale" values="fr" /> -->
+    <!-- <set-property-fallback name="locale" value="en" /> -->
+</module>

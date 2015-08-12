@@ -1,0 +1,739 @@
+/* === Standard elements === */
+
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,300,700);
+
+body,table,table td,select,input,button {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 10pt;
+}
+
+input:focus {
+	background-color: #ffffaa;
+}
+
+span.smaller {
+	font-weight: 300;
+	font-size: 80%;
+}
+
+/* === Icons === */
+@sprite .timeline-clock-icon {
+	gwt-image: "timelineClockPng";
+	width: auto;
+}
+
+@sprite .timeline-walk-icon {
+	gwt-image: "timelineWalkPng";
+	width: auto;
+}
+
+@sprite .timeline-bicycle-icon {
+	gwt-image: "timelineBicyclePng";
+	width: auto;
+}
+
+@sprite .timeline-bicycle-rental-icon {
+	gwt-image: "timelineBicyclePng";
+	width: auto;
+}
+
+@sprite .timeline-car-icon {
+	gwt-image: "timelineCarPng";
+	width: auto;
+}
+
+@sprite .timeline-wait-icon {
+	gwt-image: "timelineWaitPng";
+	width: auto;
+}
+
+@sprite .timeline-transit-icon {
+	gwt-image: "timelineTransitPng";
+	width: auto;
+}
+
+@sprite .departure-icon {
+	gwt-image: "flagDeparturePng";
+}
+
+@sprite .arrival-icon {
+	gwt-image: "flagArrivalPng";
+}
+
+@sprite .calendar-icon {
+	gwt-image: "calendarPng";
+}
+
+@sprite .clock-icon {
+	gwt-image: "clockPng";
+}
+
+@sprite .modes-icon {
+	gwt-image: "modesPng";
+}
+
+@sprite .loading-icon {
+	gwt-image: "loadingGif";
+}
+
+@sprite .walk-speed-icon {
+	gwt-image: "walkSpeedPng";
+}
+
+@sprite .bike-speed-icon {
+	gwt-image: "bikeSpeedPng";
+}
+
+@sprite .transfers-options-icon {
+	gwt-image: "transfersOptionsPng";
+}
+
+@sprite .collapsed-icon {
+	gwt-image: "collapsedPng";
+}
+
+@sprite .expanded-icon {
+	gwt-image: "expandedPng";
+}
+
+@sprite .zoomin-icon {
+	gwt-image: "zoomInPng";
+}
+
+@sprite .zoomout-icon {
+	gwt-image: "zoomOutPng";
+}
+
+@sprite .centermap-icon {
+	gwt-image: "centerMapPng";
+}
+
+@sprite .warn-icon {
+	gwt-image: "warnPng";
+}
+
+@sprite .info-icon {
+	gwt-image: "infoPng";
+}
+
+@sprite .walk-icon {
+	gwt-image: "modeWalkPng";
+}
+
+@sprite .car-icon {
+	gwt-image: "modeCarPng";
+}
+
+@sprite .bicycle-icon {
+	gwt-image: "modeBicyclePng";
+}
+
+@sprite .bus-icon {
+	gwt-image: "modeBusPng";
+}
+
+@sprite .ferry-icon {
+	gwt-image: "modeFerryPng";
+}
+
+@sprite .gondola-icon {
+	gwt-image: "modeGondolaPng";
+}
+
+@sprite .plane-icon {
+	gwt-image: "modePlanePng";
+}
+
+@sprite .rail-icon {
+	gwt-image: "modeRailPng";
+}
+
+@sprite .subway-icon {
+	gwt-image: "modeSubwayPng";
+}
+
+@sprite .tram-icon {
+	gwt-image: "modeTramPng";
+}
+
+@sprite .trolley-icon {
+	gwt-image: "modeTrolleyPng";
+}
+
+@sprite .bicycle-rental-icon {
+	gwt-image: "modeBikeRentalPng";
+}
+
+/* === Planner form === */
+table.planner-form-panel {
+	padding: 5px;
+	padding-top: 86px;
+	background-image: url("otp-logo.png");
+	background-position: 10px 5px;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	border-bottom: 1px black solid;
+}
+
+table.planner-form-panel input {
+	font-weight: bold;
+}
+
+.departure-panel, .arrival-panel {
+	width: 100%;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 28px;
+	padding-right: 0px;
+}
+
+.departure-panel table, .arrival-panel table {
+	width: 100%;
+}
+
+.departure-panel input, .arrival-panel input {
+	width: 100%;
+	font-size: 12pt;
+}
+
+.departure-panel button, .arrival-panel button {
+	margin-left: 12px;
+}
+
+.no-address-found {
+	font-weight: bold;
+	font-size: 12pt;
+	padding: 0.3em;
+	padding-left: 28px;
+	width: auto;
+	height: auto;
+}
+
+.several-address-found {
+	font-weight: bold;
+	font-size: 12pt;
+	padding: 0.3em;
+}
+
+.geocoder-address-proposal {
+	padding: 0.1em;
+}
+
+.geocoder-address-proposal:hover {
+	background-color: #ffffaa;
+}
+
+.datetime-panel {
+	padding-left: 28px;
+	width: auto;
+	height: auto;
+}
+
+.datetime-to-label {
+	padding-top: 4px;
+}
+
+.show-hide-options {
+	padding-left: 20px;
+}
+
+.show-hide-options-hidden {
+}
+
+.show-hide-options-visible {
+}
+
+.modes-panel {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding-left: 28px;
+}
+
+.walk-speed-panel {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding-left: 28px;
+}
+
+.bike-speed-panel {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding-left: 28px;
+}
+
+.transfers-options-panel {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding-left: 28px;
+}
+
+.date-panel input {
+	width: 12ex;
+}
+
+.datetime-to-label {
+	padding-left: 0.5ex;
+	padding-right: 0.5ex;
+}
+
+.time-panel input {
+	width: 3ex !important;
+}
+
+button.plan-button {
+	margin: 5px;
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+.link-anchor {
+	padding-left: 1em;
+}
+
+.please-wait-panel {
+	margin: 5px;
+	padding-left: 28px;
+	width: auto;
+}
+
+.itinerary-panel-outer {
+	border-bottom: 1px black solid;
+	width: 100%;
+}
+
+.itinerary-panel-outer:hover {
+	background-color: #ffffdd;
+}
+
+.itinerary-panel-opened {
+	background-color: #eeeeee;
+}
+
+.itinerary-panel-opened:hover {
+	background-color: #f0f0f0;
+}
+
+.itinerary-summary-panel {
+	padding-left: 5px;
+	padding-top: 2px;
+	padding-right: 2px;
+	width: 100%;
+}
+
+.itinerary-pin-button {
+	width: 16px;
+	height: 16px;
+	border: 0;
+	background: none;
+}
+
+.itinerary-close-button {
+	width: 16px;
+	height: 16px;
+	border: 0;
+	background: none;
+}
+
+.itinerary-details-show-hide {
+	margin-left: 1em;
+	color: #555555;
+}
+
+.itinerary-details-print-link {
+	margin-left: 1em;
+	color: #555555;
+}
+
+.itinerary-details-show-hide:hover {
+	text-decoration: underline;
+	color: blue;
+}
+
+.itinerary-details-panel {
+	border: 0px;
+	padding: 0px;
+	padding-left: 5px;
+	margin-left: 0px;
+	border-top: 1px #888888 dashed;
+	width: 100%;
+}
+
+.itinerary-topbar-panel {
+	width: 100%;
+}
+
+.itinerary-addresses-panel {
+	font-size: 10pt;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.itinerary-departure-time, .itinerary-arrival-time {
+	font-size: 10pt;
+	font-weight: bold;
+	color: white;
+	margin-right: 4px;
+	padding-left: 2px;
+	padding-right: 2px;
+	border-radius: 4px;
+}
+
+.itinerary-departure-time {
+	background-color: #00BB00;
+}
+
+.itinerary-arrival-time {
+	background-color: #CC0000;
+}
+
+.itinerary-address {
+	position: relative;
+}
+
+.itinerary-address-inner {
+	position: absolute;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+}
+
+.itinerary-times-panel {
+	margin-right: 2px;
+	padding-right: 2px;
+}
+
+.itinerary-departure-date {
+	font-size: 10pt;
+	font-weight: bold;
+	color: gray;
+}
+
+.itinerary-date-duration-panel {
+	margin-right: 0.5em;
+}
+
+.itinerary-duration {
+	font-size: 18pt;
+	font-weight: bold;
+	color: black;
+}
+
+.itinerary-modeline-road-icon {
+	padding-left: 26px;
+	width: 0px;
+	height: 24px;
+}
+
+.itinerary-modeline-transit-icon {
+	padding-left: 26px;
+	padding-right: 2px;
+	height: 24px;
+	width: auto;
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+.itinerary-modeline-transit-icon .route-code {
+	height: 24px;
+}
+
+.itinerary-timeline {
+	margin: 4px;
+	padding-left: 18px;
+}
+
+.itinerary-timeline table {
+	border: none;
+	border-left: 2px black solid;
+	border-right: 2px black solid;
+	width: 100%;
+	height: 16px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+.itinerary-timeline table td {
+	background-repeat: repeat-x;
+	background-position: center;
+	border-left: 2px black solid;
+	padding: 0;
+}
+
+.itinerary-timeline table td div {
+	overflow: hidden;
+	white-space: nowrap;
+	font-size: 100%;
+	font-weight: bold;
+	color: white;
+}
+
+.itinerary-modeline {
+	overflow: hidden;
+}
+
+.itinerary-alerts-count {
+	padding-left: 24px;
+	font-size: 160%;
+	font-weight: bold;
+	padding-right: 2px;
+}
+
+.route-code {
+	padding-left: 3px;
+	padding-right: 3px;
+	display: inline-block;
+	zoom: 1;
+}
+
+.itinerary-details-line {
+	width: auto;
+	height: auto;
+	padding-left: 32px;
+	font-size: 12pt;
+	min-height: 24px;
+	background-repeat: no-repeat;
+}
+
+.itinerary-details-departure {
+}
+
+.itinerary-details-departure .time {
+	color: #00BB00;
+	font-weight: bold;
+}
+
+.itinerary-details-arrival {
+}
+
+.itinerary-details-arrival .time {
+	color: #BB0000;
+	font-weight: bold;
+}
+
+.itinerary-details-road-first-line {
+	font-size: 12pt;
+}
+
+.itinerary-details-road-second-line {
+	display: inline-block;
+	color: gray;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.itinerary-details-road-step {
+	padding-left: 20px;
+	text-indent: -20px;
+	font-size: 9pt;
+	font-weight: normal;
+}
+
+.itinerary-details-road-step div {
+	display: inline;
+	padding-left: 1em;
+}
+
+.itinerary-details-road-step .distance {
+	color: gray;
+}
+
+.itinerary-details-transit-departure {
+	font-size: 12pt;
+}
+
+.itinerary-details-transit-departure .time {
+	color: gray;
+	font-weight: bold;
+}
+
+.itinerary-details-transit-headsign {
+	font-size: 12pt;
+}
+
+.itinerary-details-transit-headsign .route-code {
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+.itinerary-details-transit-arrival {
+	font-size: 12pt;
+}
+
+.itinerary-details-transit-arrival .time {
+	color: gray;
+	font-weight: bold;
+}
+
+.itinerary-copyrights {
+	color: gray;
+	font-size: 8pt;
+}
+
+.info-panel-departure {
+	width: auto;
+	height: auto;
+	padding-left: 28px;
+	font-size: 12pt;
+}
+
+.info-panel-departure .time {
+	color: #00BB00;
+	font-weight: bold;
+}
+
+.info-panel-arrival {
+	width: auto;
+	height: auto;
+	padding-left: 28px;
+	font-size: 12pt;
+}
+
+.info-panel-arrival .time {
+	color: #CC0000;
+	font-weight: bold;
+}
+
+.info-panel-road {
+	width: auto;
+	height: auto;
+	padding-left: 28px;
+	font-size: 12pt;
+}
+
+.info-panel-road-step {
+	width: auto;
+	height: auto;
+	font-size: 10pt;
+}
+
+.info-panel-transit {
+	width: auto;
+	height: auto;
+	padding-left: 28px;
+	font-size: 12pt;
+}
+
+.info-panel-transit .time, .info-panel-transit .route-code {
+	font-weight: bold;
+}
+
+/* === Alerts === */
+.alert-showhide-link {
+	display: block;
+	width: 100%;
+	text-decoration: none;
+	font-weight: bold;
+	padding: 0.2em;
+	border-bottom: 1px black solid;
+}
+
+.general-alert {
+	border-bottom: 1px black solid;
+	width: 100%;
+}
+
+.general-alert:hover {
+	background-color: #ffffcc;
+}
+
+.alert-details-outer {
+	position: relative;
+}
+
+.general-alert .alert-details-inner, .itinerary-alert .alert-details-inner {
+	display: none;
+}
+
+.general-alert:hover .alert-details-inner, .itinerary-alert:hover .alert-details-inner {
+	display: block;
+	position: absolute;
+	z-index: 100000;
+	top: 0;
+	left: 0;
+	width: 90%;
+	border: 1px solid black;
+	background-color: #ffffcc;
+	box-shadow: 5px 10px 10px -5px #666666;
+	border-bottom-right-radius: 12px;
+}
+
+.itinerary-alert {
+	border-bottom: 1px black dashed;
+	width: 100%;
+}
+
+.alert-title {
+	font-weight: bold;
+}
+
+.alert-datetime {
+	width: 100%;
+	text-align: right;
+	font-style: italic;
+	padding-right: 0.5em;
+	border-bottom: 1px #888888 dotted;
+}
+
+.alert-header {
+	width: 100%;
+}
+
+.alert-description {
+	padding: 0.5em;
+	text-align: justify;
+}
+
+.alert-url {
+	padding: 0.5em;
+	width: 100%;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+/* === Popup menu === */
+.popup-menu .gwt-MenuItem {
+	padding-left: 28px;
+}
+
+/* === OpenLayers === */
+div.generic-popup {
+	padding-left: 32px;
+	width: 200px;
+	max-width: 240px;
+	min-height: 100px;
+}
+
+div.poi-popup {
+}
+
+div.instructions-popup {
+}
+
+/* === GWT === */
+.gwt-SplitLayoutPanel-HDragger {
+	background-color: #dddddd;
+}
+
+.gwt-PushButton {
+	padding: 0;
+}
+
+.gwt-ToggleButton {
+	padding: 0;
+}
+
+.gwt-MenuBar-vertical table {
+	width: 100%;
+}
+
+.gwt-MenuBar .gwt-MenuItem-selected {
+	background-color: #333333;
+	color: white;
+}
+
+/* === Print === */
+
+.print-area {
+	margin: 0.5em;
+}
