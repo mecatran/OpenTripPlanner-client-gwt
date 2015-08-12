@@ -121,10 +121,11 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 				modeCapabilities.setHasAdvancedOptions(true);
 				modeCapabilities.setHasTransit(otpRouterConf.getTransitModes()
 						.length() > 0);
-				// TODO How do we know that?
+				// TODO How do we know that? We assume always true
+				modeCapabilities.setHasWalkOnly(true);
+				modeCapabilities.setHasBikeOnly(true);
 				modeCapabilities.setHasBikeAndTransit(true);
 				modeCapabilities.setHasBikeRental(true);
-				modeCapabilities.setHasWalkOnly(true);
 				plannerListener.onPlannerConfigured(bounds, modeCapabilities);
 			}
 

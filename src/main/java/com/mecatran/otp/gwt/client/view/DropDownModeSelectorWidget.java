@@ -19,6 +19,7 @@
 package com.mecatran.otp.gwt.client.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -63,7 +64,7 @@ public class DropDownModeSelectorWidget extends Composite implements
 	private ExtValueListBox<Float> bikeFactorsDropdown;
 	private ExtValueListBox<Integer> transfersDropdown;
 	private ExtValueListBox<Integer> maxWalkDistanceDropdown;
-	private Anchor showHideAnchor;
+	private Anchor showHideAdvOptsAnchor;
 	private Panel toHidePanel;
 	private Panel walkOptionsPanel;
 	private Panel bikeOptionsPanel;
@@ -76,7 +77,7 @@ public class DropDownModeSelectorWidget extends Composite implements
 	private int transferPenaltySeconds;
 	private ModeSelectorListener listener;
 
-	public DropDownModeSelectorWidget(ModeCapabilitiesBean modeCapabilities) {
+	public DropDownModeSelectorWidget() {
 		// Build the components
 		Panel rootPanel = new VerticalPanel();
 
@@ -85,9 +86,6 @@ public class DropDownModeSelectorWidget extends Composite implements
 		modePanel.addStyleName("modes-panel");
 		modePanel.addStyleName("modes-icon");
 		modeDropdown = new ExtValueListBox<ModeSet>();
-		for (ModeSet modeSet : buildModeSetList(modeCapabilities)) {
-			modeDropdown.addItem(modeSet.getHumanName(), modeSet);
-		}
 		modeDropdown.addChangeHandler(new ChangeHandler() {
 			@Override
 			public void onChange(ChangeEvent event) {
@@ -96,8 +94,7 @@ public class DropDownModeSelectorWidget extends Composite implements
 		});
 		modeDropdown.setSelectedIndex(0);
 		modePanel.add(modeDropdown);
-		if (modeDropdown.getItemCount() > 1)
-			rootPanel.add(modePanel);
+		rootPanel.add(modePanel);
 
 		// Departure/arrival
 		dateTimePanel = new FlowPanel();
@@ -137,27 +134,27 @@ public class DropDownModeSelectorWidget extends Composite implements
 		timePanel.add(timePicker);
 
 		// Show/hide bar & panel
-		showHideAnchor = new Anchor(I18nUtils.tr("show.options"));
-		showHideAnchor.addClickHandler(new ClickHandler() {
+		showHideAdvOptsAnchor = new Anchor(I18nUtils.tr("show.options"));
+		showHideAdvOptsAnchor.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				boolean visible = !toHidePanel.isVisible();
 				toHidePanel.setVisible(visible);
-				showHideAnchor.setText(I18nUtils.tr(visible ? "hide.options"
-						: "show.options"));
+				showHideAdvOptsAnchor.setText(I18nUtils
+						.tr(visible ? "hide.options" : "show.options"));
 				if (visible) {
-					showHideAnchor.removeStyleName("collapsed-icon");
-					showHideAnchor.addStyleName("expanded-icon");
+					showHideAdvOptsAnchor.removeStyleName("collapsed-icon");
+					showHideAdvOptsAnchor.addStyleName("expanded-icon");
 				} else {
-					showHideAnchor.addStyleName("collapsed-icon");
-					showHideAnchor.removeStyleName("expanded-icon");
+					showHideAdvOptsAnchor.addStyleName("collapsed-icon");
+					showHideAdvOptsAnchor.removeStyleName("expanded-icon");
 				}
 			}
 		});
-		showHideAnchor.addStyleName("show-hide-options");
-		showHideAnchor.addStyleName("collapsed-icon");
-		if (modeCapabilities.isHasAdvancedOptions())
-			rootPanel.add(showHideAnchor);
+		showHideAdvOptsAnchor.addStyleName("show-hide-options");
+		showHideAdvOptsAnchor.addStyleName("collapsed-icon");
+		// showHideAdvOptsAnchor.setVisible(false);
+		rootPanel.add(showHideAdvOptsAnchor);
 		toHidePanel = new VerticalPanel();
 		toHidePanel.setVisible(false);
 		rootPanel.add(toHidePanel);
@@ -217,8 +214,24 @@ public class DropDownModeSelectorWidget extends Composite implements
 	}
 
 	@Override
+	public void setModeCapabilities(ModeCapabilitiesBean modeCapabilities) {
+		modeDropdown.clear();
+		for (ModeSet modeSet : buildModeSetList(modeCapabilities)) {
+			modeDropdown.addItem(modeSet.getHumanName(), modeSet);
+		}
+		showHideAdvOptsAnchor.setVisible(modeCapabilities
+				.isHasAdvancedOptions());
+		handleModeChange();
+	}
+
+	@Override
 	public Set<TransportMode> getSelectedModes() {
-		return modeDropdown.getSelectedVal().getModes();
+		ModeSet selected = modeDropdown.getSelectedVal();
+		if (selected != null) {
+			return selected.getModes();
+		} else {
+			return Collections.emptySet();
+		}
 	}
 
 	@Override

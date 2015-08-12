@@ -59,7 +59,7 @@ public class PlannerFormWidget extends Composite implements
 
 	private PlannerWidgetListener plannerWidgetListener;
 
-	public PlannerFormWidget(ModeCapabilitiesBean modeCapabilities) {
+	public PlannerFormWidget() {
 		VerticalPanel rootPanel = new VerticalPanel();
 		// Departure
 		departureSuggestBox = new AddressProposalBox();
@@ -106,8 +106,7 @@ public class PlannerFormWidget extends Composite implements
 				});
 		rootPanel.add(arrivalSuggestBox.getAsWidget());
 		// Mode selector
-		DropDownModeSelectorWidget modeSelectorWidget = new DropDownModeSelectorWidget(
-				modeCapabilities);
+		DropDownModeSelectorWidget modeSelectorWidget = new DropDownModeSelectorWidget();
 		modeSelectorWidget.setModeSelectorListener(this);
 		modeSelector = modeSelectorWidget;
 		rootPanel.add(modeSelectorWidget);
@@ -145,6 +144,10 @@ public class PlannerFormWidget extends Composite implements
 		rootPanel.addStyleName("planner-form-panel");
 		initWidget(rootPanel);
 		setWidth("100%");
+	}
+
+	public void setModeCapabilities(ModeCapabilitiesBean modeCapabilities) {
+		modeSelector.setModeCapabilities(modeCapabilities);
 	}
 
 	public void setPlannerWidgetListener(

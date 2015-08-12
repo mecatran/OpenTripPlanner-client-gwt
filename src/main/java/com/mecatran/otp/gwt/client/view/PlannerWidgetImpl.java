@@ -64,7 +64,7 @@ public class PlannerWidgetImpl extends Composite implements PlannerWidget,
 	private PlannerWidgetListener plannerWidgetListener;
 	private PrintWidgetListener printWidgetListener;
 
-	public PlannerWidgetImpl(ModeCapabilitiesBean modeCapabilities) {
+	public PlannerWidgetImpl() {
 		rootPanel = new DeckLayoutPanel();
 
 		// Screen interaction widget
@@ -81,7 +81,7 @@ public class PlannerWidgetImpl extends Composite implements PlannerWidget,
 
 		plannerMapWidget = new OpenLayersPlannerMapWidget();
 		plannerMapWidget.setMapListener(this);
-		plannerFormWidget = new PlannerFormWidget(modeCapabilities);
+		plannerFormWidget = new PlannerFormWidget();
 		plannerFormWidget.setPlannerWidget(this);
 		itineraryStackWidget = new ItineraryStackWidget();
 		alertStackWidget = new AlertStackWidget();
@@ -102,6 +102,11 @@ public class PlannerWidgetImpl extends Composite implements PlannerWidget,
 		rootPanel.setSize("100%", "100%");
 
 		initWidget(rootPanel);
+	}
+
+	@Override
+	public void setModeCapabilities(ModeCapabilitiesBean modeCapabilities) {
+		plannerFormWidget.setModeCapabilities(modeCapabilities);
 	}
 
 	@Override

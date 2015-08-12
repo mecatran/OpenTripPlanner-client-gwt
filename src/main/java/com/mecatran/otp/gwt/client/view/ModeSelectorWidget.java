@@ -21,6 +21,7 @@ package com.mecatran.otp.gwt.client.view;
 import java.util.Date;
 import java.util.Set;
 
+import com.mecatran.otp.gwt.client.model.ModeCapabilitiesBean;
 import com.mecatran.otp.gwt.client.model.TransportMode;
 
 public interface ModeSelectorWidget {
@@ -33,6 +34,9 @@ public interface ModeSelectorWidget {
 
 	public abstract void setModeSelectorListener(
 			ModeSelectorListener modeSelectorListener);
+
+	public abstract void setModeCapabilities(
+			ModeCapabilitiesBean modeCapabilities);
 
 	public abstract Set<TransportMode> getSelectedModes();
 
@@ -49,7 +53,7 @@ public interface ModeSelectorWidget {
 	public abstract void setWheelchairAccessible(boolean wheelchairAccessible);
 
 	public abstract int getMaxWalkDistanceMeters();
-	
+
 	public abstract float getWalkReluctanceFactor();
 
 	public abstract boolean isWheelchairAccessible();

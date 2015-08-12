@@ -26,6 +26,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.mecatran.otp.gwt.client.model.AlertBean;
 import com.mecatran.otp.gwt.client.model.ItineraryBean;
 import com.mecatran.otp.gwt.client.model.LocationBean;
+import com.mecatran.otp.gwt.client.model.ModeCapabilitiesBean;
 import com.mecatran.otp.gwt.client.model.POIBean;
 import com.mecatran.otp.gwt.client.model.PlanRequestBean;
 import com.mecatran.otp.gwt.client.model.TransportMode;
@@ -67,6 +68,8 @@ public interface PlannerWidget {
 
 	public void setPlannerWidgetListener(
 			PlannerWidgetListener plannerWidgetListener);
+
+	public void setModeCapabilities(ModeCapabilitiesBean modeCapabilities);
 
 	public void setGeocoderProxy(GeocoderProxy geocoderProxy);
 

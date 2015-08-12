@@ -30,6 +30,11 @@ public class ModeCapabilitiesBean {
 	public ModeCapabilitiesBean() {
 	}
 
+	/*
+	 * Fancy options such as walk speed, max walk distance, bike speed, bike
+	 * safety, etc... Should be mode fine-grained if we want to accept more
+	 * planners proxy.
+	 */
 	public boolean isHasAdvancedOptions() {
 		return hasAdvancedOptions;
 	}

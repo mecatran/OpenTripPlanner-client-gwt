@@ -87,6 +87,5 @@ public class HttpUtils {
 		} catch (RequestException e1) {
 			listener.onFailure(e1.getLocalizedMessage());
 		}
-
 	}
 }

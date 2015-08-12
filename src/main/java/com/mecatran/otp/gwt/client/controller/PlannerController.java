@@ -78,8 +78,7 @@ public class PlannerController implements PlannerWidgetListener,
 		FormatUtils.setTimeFormat(I18nUtils.tr("time.format.small"));
 		FormatUtils.setDateFormat(I18nUtils.tr("date.format.small"));
 
-		ModeCapabilitiesBean modeCapabilities = getModeCapabilitiesFromConfig(config);
-		PlannerWidgetImpl theWidget = new PlannerWidgetImpl(modeCapabilities);
+		PlannerWidgetImpl theWidget = new PlannerWidgetImpl();
 		plannerWidget = theWidget;
 		plannerWidget.setPlannerWidgetListener(this);
 		// Use the "external window" print form
@@ -134,8 +133,6 @@ public class PlannerController implements PlannerWidgetListener,
 					.getMaxLon()));
 			setBounds(bounds);
 		}
-		plannerWidget.switchMapBackground(plannerWidget.getPlanRequestBean()
-				.getModes());
 	}
 
 	public Widget getPlannerWidget() {
@@ -219,24 +216,15 @@ public class PlannerController implements PlannerWidgetListener,
 		geocoderProxy = geocoderMultiplexer;
 	}
 
-	private ModeCapabilitiesBean getModeCapabilitiesFromConfig(
-			PlannerWidgetConfig config) {
-		ModeCapabilitiesBean modeCapabilities = new ModeCapabilitiesBean();
-		modeCapabilities.setHasTransit(config.isHasTransit());
-		modeCapabilities.setHasWalkOnly(config.isHasWalkOnly());
-		modeCapabilities.setHasBikeOnly(config.isHasBikeOnly());
-		modeCapabilities.setHasBikeAndTransit(config.isHasBikeAndTransit());
-		modeCapabilities.setHasBikeRental(config.isHasBikeRental());
-		if (config.getProxyType().equals(PlannerWidgetConfig.PROXY_OTP)) {
-			// TODO This should be returned by the proxy itself
-			modeCapabilities.setHasAdvancedOptions(true);
-		}
-		return modeCapabilities;
-	}
-
 	private void setBounds(Wgs84BoundsBean bounds) {
 		plannerWidget.setBounds(bounds);
 		geocoderProxy.configure(bounds, config.getMainCountryName());
+	}
+
+	private void setModeCapabilities(ModeCapabilitiesBean modeCapabilities) {
+		plannerWidget.setModeCapabilities(modeCapabilities);
+		plannerWidget.switchMapBackground(plannerWidget.getPlanRequestBean()
+				.getModes());
 	}
 
 	/* === PlannerWidgetListener === */
@@ -376,7 +364,19 @@ public class PlannerController implements PlannerWidgetListener,
 		if (bounds != null) {
 			setBounds(bounds);
 		}
-		// TODO Handle modeCapabilities.
+		if (modeCapabilities != null) {
+			modeCapabilities.setHasWalkOnly(modeCapabilities.isHasWalkOnly()
+					&& config.isHasWalkOnly());
+			modeCapabilities.setHasBikeOnly(modeCapabilities.isHasBikeOnly()
+					&& config.isHasBikeOnly());
+			modeCapabilities.setHasTransit(modeCapabilities.isHasTransit()
+					&& config.isHasTransit());
+			modeCapabilities.setHasBikeRental(modeCapabilities
+					.isHasBikeRental() && config.isHasBikeRental());
+			modeCapabilities.setHasBikeAndTransit(modeCapabilities
+					.isHasBikeAndTransit() && config.isHasBikeAndTransit());
+			setModeCapabilities(modeCapabilities);
+		}
 	}
 
 	/* === PrintWidgetListener === */
