@@ -46,9 +46,8 @@ import com.mecatran.otp.gwt.client.proxies.POISource;
 import com.mecatran.otp.gwt.client.proxies.POISource.POIListener;
 import com.mecatran.otp.gwt.client.proxies.TransitPlannerProxy;
 import com.mecatran.otp.gwt.client.proxies.TransitPlannerProxy.TransitPlannerListener;
-import com.mecatran.otp.gwt.client.proxies.dummy.LatLngGeocoder;
+import com.mecatran.otp.gwt.client.proxies.osm.NominatimGeocoderProxy;
 import com.mecatran.otp.gwt.client.proxies.otp.OtpBikeRentalProxy;
-import com.mecatran.otp.gwt.client.proxies.otp.OtpGeocoderProxy;
 import com.mecatran.otp.gwt.client.proxies.otp.OtpPlannerProxy;
 import com.mecatran.otp.gwt.client.utils.FormatUtils;
 import com.mecatran.otp.gwt.client.view.PlannerWidget;
@@ -183,7 +182,6 @@ public class PlannerController implements PlannerWidgetListener,
 		}
 
 		/* Alert sources */
-		// TODO Configure
 		// alertsSourceProxy = new XyzAlertsSourceProxy();
 		// alertsSourceProxy.configure(config.getLang());
 
@@ -196,18 +194,16 @@ public class PlannerController implements PlannerWidgetListener,
 		}
 
 		/* POIs sources */
-		// TODO Configure
 		// poiSources.add(new XyzPOISource());
 
 		/* Geocoder(s) */
 		GeocoderMultiplexer geocoderMultiplexer = new GeocoderMultiplexer();
+		geocoderMultiplexer.addGeocoder(new NominatimGeocoderProxy(
+				NominatimGeocoderProxy.OSM_NOMINATIM_URL, 10));
 		if (config.getProxyType().equals(PlannerWidgetConfig.PROXY_OTP)) {
-			geocoderMultiplexer.addGeocoder(new OtpGeocoderProxy(config
-					.getOtpUrl(), config.getRouterId()));
-		} else {
-			// TODO Implement OSM Nominatim geocoder
-			// Poor man fallback: use a lat,lng dummy geocoder
-			geocoderMultiplexer.addGeocoder(new LatLngGeocoder());
+			// TODO Parametrize
+			// geocoderMultiplexer.addGeocoder(new OtpGeocoderProxy(config
+			// .getOtpUrl(), config.getRouterId()));
 		}
 		// Add a geocoder for each POI source
 		for (POISource poiSource : poiSources) {
