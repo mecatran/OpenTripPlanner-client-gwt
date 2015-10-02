@@ -374,7 +374,7 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 	}
 
 	private String buildConfUrl() {
-		return baseUrl + "/routers/" + routerId;
+		return baseUrl + "/routers/" + routerId + "/metadata";
 	}
 
 	private String buildGetUrl(PlanRequestBean planRequest) {
