@@ -110,11 +110,11 @@ public class ValueTextBox extends TextBox {
 			if (getSelectionLength() > 0) {
 				newText = previousText.substring(0, getCursorPos())
 						+ event.getCharCode()
-						+ previousText.substring(getCursorPos()
-								+ getSelectionLength(), previousText.length());
+						+ previousText.substring(
+								getCursorPos() + getSelectionLength(),
+								previousText.length());
 			} else {
-				newText = previousText.substring(0, index)
-						+ event.getCharCode()
+				newText = previousText.substring(0, index) + event.getCharCode()
 						+ previousText.substring(index, previousText.length());
 			}
 			cancelKey();

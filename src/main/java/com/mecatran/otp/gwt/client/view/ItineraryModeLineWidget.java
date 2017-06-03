@@ -56,9 +56,9 @@ public class ItineraryModeLineWidget extends Composite {
 				// Road mode icons
 				Label roadLabel = new Label("");
 				roadLabel.addStyleName("itinerary-modeline-road-icon");
-				roadLabel.addStyleName(FormatUtils
-						.getCssClassNameFromTransportMode(roadLeg.getMode())
-						+ "-icon");
+				roadLabel.addStyleName(
+						FormatUtils.getCssClassNameFromTransportMode(
+								roadLeg.getMode()) + "-icon");
 				rootPanel.add(roadLabel);
 			} else if (leg.getTravelType() == TravelType.TRANSIT) {
 				ItineraryTransitLegBean transitLeg = leg.getAsTransitLeg();
@@ -66,9 +66,9 @@ public class ItineraryModeLineWidget extends Composite {
 				// Transit mode icons
 				HTML transitLabel = new HTML();
 				transitLabel.addStyleName("itinerary-modeline-transit-icon");
-				transitLabel.addStyleName(FormatUtils
-						.getCssClassNameFromTransportMode(transitLeg.getMode())
-						+ "-icon");
+				transitLabel.addStyleName(
+						FormatUtils.getCssClassNameFromTransportMode(
+								transitLeg.getMode()) + "-icon");
 				String code = transitLeg.getRoute().getCode();
 				// Limit code to first 5 characters
 				if (code.length() > 5)

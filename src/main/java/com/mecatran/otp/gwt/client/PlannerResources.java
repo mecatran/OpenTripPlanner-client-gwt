@@ -31,7 +31,7 @@ public interface PlannerResources extends ClientBundle {
 
 	@Source("js/GwtOpenLayersUtils.js")
 	TextResource gwtOpenLayersUtilsJs();
-	
+
 	@Source("js/OpenStreetMap.js")
 	TextResource gwtOpenStreetMapJs();
 

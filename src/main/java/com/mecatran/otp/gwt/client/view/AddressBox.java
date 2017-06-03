@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.mecatran.otp.gwt.client.model.LocationBean;
 import com.mecatran.otp.gwt.client.proxies.GeocoderProxy;
 
-public interface AddressBox  {
+public interface AddressBox {
 
 	public interface AddressSuggestBoxListener {
 
@@ -33,7 +33,8 @@ public interface AddressBox  {
 		public void onFocus();
 	}
 
-	public abstract void setAddressSuggestBoxListener(AddressSuggestBoxListener listener);
+	public abstract void setAddressSuggestBoxListener(
+			AddressSuggestBoxListener listener);
 
 	public abstract LocationBean getLocation();
 

@@ -21,8 +21,8 @@ package com.mecatran.otp.gwt.client.i18n;
 /**
  * 
  */
-public class OpenTripPlannerClientMessagesFr extends
-		OpenTripPlannerClientMessages {
+public class OpenTripPlannerClientMessagesFr
+		extends OpenTripPlannerClientMessages {
 
 	public OpenTripPlannerClientMessagesFr() {
 		add("ok", "OK");
@@ -103,7 +103,8 @@ public class OpenTripPlannerClientMessagesFr extends
 		add("heading.to", "⇨");
 		add("departure.address.not.found",
 				"Adresse de départ introuvable: '{0}'. ");
-		add("arrival.address.not.found", "Adresse d'arrivée introuvable: '{0}'");
+		add("arrival.address.not.found",
+				"Adresse d'arrivée introuvable: '{0}'");
 		add("address.not.found",
 				"Adresse introuvable. Veuillez saisir une adresse valide ou sélectionner un point sur la carte.");
 		add("several.address.matches",

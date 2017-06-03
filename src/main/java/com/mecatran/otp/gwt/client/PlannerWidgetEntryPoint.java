@@ -45,7 +45,8 @@ public class PlannerWidgetEntryPoint implements EntryPoint {
 		/* Check for config */
 		config = getConfig();
 		if (config == null) {
-			Window.alert("Unable to find JS object widget config 'otpPlannerWidgetConfig' in host page.");
+			Window.alert(
+					"Unable to find JS object widget config 'otpPlannerWidgetConfig' in host page.");
 			return;
 		}
 
@@ -59,16 +60,14 @@ public class PlannerWidgetEntryPoint implements EntryPoint {
 
 		/* Load javascript libraries. */
 		ScriptInjector
-				.fromString(
-						PlannerResources.INSTANCE.gwtOpenLayersUtilsJs()
-								.getText())
+				.fromString(PlannerResources.INSTANCE.gwtOpenLayersUtilsJs()
+						.getText())
 				.setWindow(ScriptInjector.TOP_WINDOW).inject();
 
 		/* Note: must load OSM after OpenLayers */
 		ScriptInjector
-				.fromString(
-						PlannerResources.INSTANCE.gwtOpenStreetMapJs()
-								.getText())
+				.fromString(PlannerResources.INSTANCE.gwtOpenStreetMapJs()
+						.getText())
 				.setWindow(ScriptInjector.TOP_WINDOW).inject();
 		PlannerResources.INSTANCE.css().ensureInjected();
 

@@ -43,8 +43,8 @@ import com.mecatran.otp.gwt.client.model.ModeCapabilitiesBean;
 import com.mecatran.otp.gwt.client.model.ModeSet;
 import com.mecatran.otp.gwt.client.model.TransportMode;
 
-public class DropDownModeSelectorWidget extends Composite implements
-		ModeSelectorWidget {
+public class DropDownModeSelectorWidget extends Composite
+		implements ModeSelectorWidget {
 
 	private static final float BIKE_COMFORT_FACTOR = 0.3f;
 
@@ -114,8 +114,8 @@ public class DropDownModeSelectorWidget extends Composite implements
 		datePanel.getElement().getStyle()
 				.setFloat(com.google.gwt.dom.client.Style.Float.LEFT);
 		dateTimePanel.add(datePanel);
-		DateTimeFormat dateFormat = DateTimeFormat.getFormat(I18nUtils
-				.tr("date.format.long"));
+		DateTimeFormat dateFormat = DateTimeFormat
+				.getFormat(I18nUtils.tr("date.format.long"));
 		dateBox = new DateBox();
 		dateBox.setValue(new Date());
 		dateBox.setFormat(new DateBox.DefaultFormat(dateFormat));
@@ -219,8 +219,8 @@ public class DropDownModeSelectorWidget extends Composite implements
 		for (ModeSet modeSet : buildModeSetList(modeCapabilities)) {
 			modeDropdown.addItem(modeSet.getHumanName(), modeSet);
 		}
-		showHideAdvOptsAnchor.setVisible(modeCapabilities
-				.isHasAdvancedOptions());
+		showHideAdvOptsAnchor
+				.setVisible(modeCapabilities.isHasAdvancedOptions());
 		handleModeChange();
 	}
 
@@ -361,7 +361,8 @@ public class DropDownModeSelectorWidget extends Composite implements
 			listener.onTransportModeChange(modes);
 	}
 
-	private List<ModeSet> buildModeSetList(ModeCapabilitiesBean modeCapabilities) {
+	private List<ModeSet> buildModeSetList(
+			ModeCapabilitiesBean modeCapabilities) {
 		List<ModeSet> retval = new ArrayList<ModeSet>();
 		if (modeCapabilities.isHasTransit()) {
 			// Transit only
@@ -373,8 +374,8 @@ public class DropDownModeSelectorWidget extends Composite implements
 		}
 		if (modeCapabilities.isHasWalkOnly()) {
 			// Walk only
-			retval.add(new ModeSet(I18nUtils.tr("mode.walk"),
-					TransportMode.WALK));
+			retval.add(
+					new ModeSet(I18nUtils.tr("mode.walk"), TransportMode.WALK));
 		}
 		if (modeCapabilities.isHasBikeOnly()) {
 			// Bike only
@@ -476,9 +477,8 @@ public class DropDownModeSelectorWidget extends Composite implements
 
 	@Override
 	public void setWheelchairAccessible(boolean wheelchairAccessible) {
-		walkSpeedDropdown
-				.setSelectedValue(wheelchairAccessible ? WALK_SPEED_WHEELCHAIR
-						: WALK_SPEED_MEDIUM);
+		walkSpeedDropdown.setSelectedValue(wheelchairAccessible
+				? WALK_SPEED_WHEELCHAIR : WALK_SPEED_MEDIUM);
 	}
 
 	@Override

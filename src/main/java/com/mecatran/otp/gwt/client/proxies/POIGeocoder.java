@@ -62,7 +62,8 @@ public class POIGeocoder implements GeocoderProxy, POIListener {
 		if (address.length() >= 3 && pois != null) {
 			for (POIBean poi : pois.values()) {
 				if (poi.getName().toUpperCase().contains(upperAddress)
-						&& (useBounds && bounds.contains(poi.getLocation()) || !useBounds)) {
+						&& (useBounds && bounds.contains(poi.getLocation())
+								|| !useBounds)) {
 					LocationBean location = new LocationBean();
 					location.setLocation(poi.getLocation());
 					location.setAddress(translatePoi(poi));
@@ -83,8 +84,8 @@ public class POIGeocoder implements GeocoderProxy, POIListener {
 		if (pois != null) {
 			for (POIBean poi : pois.values()) {
 				double dist = HaversineDistance.computeHaversineDistance(
-						location.getLat(), location.getLon(), poi.getLocation()
-								.getLat(), poi.getLocation().getLon());
+						location.getLat(), location.getLon(),
+						poi.getLocation().getLat(), poi.getLocation().getLon());
 				if (dist < bestDist) {
 					bestDist = dist;
 					bestPoi = poi;

@@ -36,8 +36,8 @@ public class PolylineEncoder {
 			int dLnge5 = pLnge5 - oLnge5;
 			oLate5 = pLate5;
 			oLnge5 = pLnge5;
-			encodedPoints.append(encodeSignedNumber(dLate5)).append(
-					encodeSignedNumber(dLnge5));
+			encodedPoints.append(encodeSignedNumber(dLate5))
+					.append(encodeSignedNumber(dLnge5));
 		}
 		return encodedPoints.toString();
 	}

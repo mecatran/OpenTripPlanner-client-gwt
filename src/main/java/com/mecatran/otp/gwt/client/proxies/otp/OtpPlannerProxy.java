@@ -76,19 +76,21 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 			public void onSuccess(OtpPlannerResponse otpResponse) {
 				OtpError otpError = otpResponse.getError();
 				if (otpError != null) {
-					plannerListener.onItineraryError(otpError.getMsg() + " ("
-							+ otpError.getId() + ")");
+					plannerListener.onItineraryError(
+							otpError.getMsg() + " (" + otpError.getId() + ")");
 				} else {
 					List<ItineraryBean> itineraries = new ArrayList<ItineraryBean>();
-					for (int i = 0; i < otpResponse.getItineraries().length(); i++) {
-						itineraries.add(convert(otpResponse.getItineraries()
-								.get(i), planRequest));
+					for (int i = 0; i < otpResponse.getItineraries()
+							.length(); i++) {
+						itineraries.add(
+								convert(otpResponse.getItineraries().get(i),
+										planRequest));
 					}
 					for (ItineraryBean itinerary : itineraries) {
-						itinerary.setStartAddress(humanize(planRequest
-								.getDeparture().getAddress()));
-						itinerary.setEndAddress(humanize(planRequest
-								.getArrival().getAddress()));
+						itinerary.setStartAddress(humanize(
+								planRequest.getDeparture().getAddress()));
+						itinerary.setEndAddress(humanize(
+								planRequest.getArrival().getAddress()));
 						itinerary.setRequest(planRequest);
 					}
 					plannerListener.onItineraryFound(itineraries);
@@ -110,16 +112,16 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 			@Override
 			public void onSuccess(OtpRouterConf otpRouterConf) {
 				Wgs84BoundsBean bounds = new Wgs84BoundsBean();
-				bounds.extend(new Wgs84LatLonBean(otpRouterConf
-						.getLowerLeftLatitude(), otpRouterConf
-						.getLowerLeftLongitude()));
-				bounds.extend(new Wgs84LatLonBean(otpRouterConf
-						.getUpperRightLatitude(), otpRouterConf
-						.getUpperRightLongitude()));
+				bounds.extend(new Wgs84LatLonBean(
+						otpRouterConf.getLowerLeftLatitude(),
+						otpRouterConf.getLowerLeftLongitude()));
+				bounds.extend(new Wgs84LatLonBean(
+						otpRouterConf.getUpperRightLatitude(),
+						otpRouterConf.getUpperRightLongitude()));
 				ModeCapabilitiesBean modeCapabilities = new ModeCapabilitiesBean();
 				modeCapabilities.setHasAdvancedOptions(true);
-				modeCapabilities.setHasTransit(otpRouterConf.getTransitModes()
-						.length() > 0);
+				modeCapabilities.setHasTransit(
+						otpRouterConf.getTransitModes().length() > 0);
 				// TODO How do we know that? We assume always true
 				modeCapabilities.setHasWalkOnly(true);
 				modeCapabilities.setHasBikeOnly(true);
@@ -145,8 +147,8 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 		iti.setEndLocation(planRequest.getArrival().getLocation());
 		iti.setRequest(planRequest);
 		for (int i = 0; i < otpiti.getLegs().length(); i++) {
-			iti.addLeg(convert(otpiti.getLegs().get(i), planRequest, iti
-					.getEndLocation().toString()));
+			iti.addLeg(convert(otpiti.getLegs().get(i), planRequest,
+					iti.getEndLocation().toString()));
 		}
 
 		// Itinerary distance is sum of all legs distances
@@ -163,8 +165,8 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 			if (transitLeg != null) {
 				long departureTime = transitLeg.getDepartureTime().getTime();
 				if (time < departureTime) {
-					transitLeg
-							.setWaitDurationSeconds((departureTime - time) / 1000);
+					transitLeg.setWaitDurationSeconds(
+							(departureTime - time) / 1000);
 				}
 				time = transitLeg.getArrivalTime().getTime();
 			} else {
@@ -189,14 +191,16 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 			throw new IllegalArgumentException("Invalid trip segment type");
 		}
 		leg.setDistanceMeters(Math.round(segment.getDistance()));
-		leg.setDurationSeconds(Math.round(segment.getEndTime()
-				- segment.getStartTime() + 500) / 1000);
+		leg.setDurationSeconds(
+				Math.round(segment.getEndTime() - segment.getStartTime() + 500)
+						/ 1000);
 		leg.setStartLocation(convertLocation(segment.getFrom()));
 		leg.setEndLocation(convertLocation(segment.getTo()));
 		leg.setPath(convert(leg.getStartLocation(), leg.getEndLocation(),
 				segment.getEncodedGeometry()));
-		leg.setMode(OtpPlannerResponse.convertMode(planRequest.getModes()
-				.contains(TransportMode.BICYCLE_RENTAL), segment.getMode()));
+		leg.setMode(OtpPlannerResponse.convertMode(
+				planRequest.getModes().contains(TransportMode.BICYCLE_RENTAL),
+				segment.getMode()));
 		if (segment.isRoad()) {
 			String arrivalPlaceName = segment.getTo().getName();
 			ItineraryRoadLegBean roadLeg = leg.getAsRoadLeg();
@@ -222,10 +226,10 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 						ostep.getLongitude()));
 				if (lastStep != null)
 					lastStep.setEndLocation(step.getStartLocation());
-				step.setAbsoluteDirection(convertAbsDir(ostep
-						.getAbsoluteDirection()));
-				step.setRelativeDirection(convertRelDir(ostep
-						.getRelativeDirection()));
+				step.setAbsoluteDirection(
+						convertAbsDir(ostep.getAbsoluteDirection()));
+				step.setRelativeDirection(
+						convertRelDir(ostep.getRelativeDirection()));
 				step.setDistanceMeters(Math.round(ostep.getDistance()));
 				float speedMs;
 				// We do not have a duration per leg.
@@ -243,8 +247,8 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 					speedMs = 10; // TODO
 					break;
 				}
-				step.setDurationSeconds(Math.round(step.getDistanceMeters()
-						* speedMs));
+				step.setDurationSeconds(
+						Math.round(step.getDistanceMeters() * speedMs));
 				String message = ostep.getStreetName();
 				String roadName = ostep.getStreetName();
 				if (ostep.isGeneratedName())
@@ -252,11 +256,13 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 				if (ostep.isStayOn())
 					message = I18nUtils.tr("stay.on", roadName);
 				else if (step.getRelativeDirection() != null)
-					message = I18nUtils.tr("reldir."
-							+ step.getRelativeDirection().toString(), roadName);
+					message = I18nUtils.tr(
+							"reldir." + step.getRelativeDirection().toString(),
+							roadName);
 				else if (step.getAbsoluteDirection() != null)
-					message = I18nUtils.tr("absdir."
-							+ step.getAbsoluteDirection().toString(), roadName);
+					message = I18nUtils.tr(
+							"absdir." + step.getAbsoluteDirection().toString(),
+							roadName);
 				step.setInstructions(message);
 				roadSteps.add(step);
 				lastStep = step;
@@ -267,8 +273,8 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 			roadLeg.setRoadSteps(roadSteps);
 		} else if (segment.isTransit()) {
 			ItineraryTransitLegBean transitLeg = leg.getAsTransitLeg();
-			transitLeg.setDepartureTime(new Date(Math.round(segment
-					.getStartTime())));
+			transitLeg.setDepartureTime(
+					new Date(Math.round(segment.getStartTime())));
 			transitLeg
 					.setArrivalTime(new Date(Math.round(segment.getEndTime())));
 			transitLeg.setDepartureStop(convertTransitStop(segment.getFrom()));
@@ -276,18 +282,20 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 			transitLeg.setDepartureTimezone(null); // TODO Unused
 			transitLeg.setArrivalTimezone(null); // TODO Unused
 			transitLeg.setDistanceMeters(Math.round(segment.getDistance()));
-			transitLeg.setDurationSeconds(Math.round(segment.getEndTime()
-					- segment.getStartTime() + 500) / 1000);
+			transitLeg.setDurationSeconds(Math
+					.round(segment.getEndTime() - segment.getStartTime() + 500)
+					/ 1000);
 			transitLeg.setHeadsign(segment.getHeadsign());
 			transitLeg.setWaitDurationSeconds(0); // TODO Unused
 			transitLeg.setRoute(convertRoute(segment));
 			String routeName = transitLeg.getRoute().getCode()
-					+ (transitLeg.getRoute().getName() != null ? " ("
-							+ transitLeg.getRoute().getName() + ")" : "");
-			String headsign = transitLeg.getHeadsign() != null ? transitLeg
-					.getHeadsign() : "";
-			transitLeg.setInstructions(I18nUtils.tr("take.the.route",
-					routeName, headsign));
+					+ (transitLeg.getRoute().getName() != null
+							? " (" + transitLeg.getRoute().getName() + ")"
+							: "");
+			String headsign = transitLeg.getHeadsign() != null
+					? transitLeg.getHeadsign() : "";
+			transitLeg.setInstructions(
+					I18nUtils.tr("take.the.route", routeName, headsign));
 		}
 		return leg;
 	}
@@ -385,11 +393,11 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 		Wgs84LatLonBean departure = planRequest.getDeparture().getLocation();
 		Wgs84LatLonBean arrival = planRequest.getArrival().getLocation();
 		sb.append("?fromPlace=");
-		sb.append(URL.encodeQueryString(departure.getLat() + ","
-				+ departure.getLon()));
+		sb.append(URL.encodeQueryString(
+				departure.getLat() + "," + departure.getLon()));
 		sb.append("&toPlace=");
-		sb.append(URL.encodeQueryString(arrival.getLat() + ","
-				+ arrival.getLon()));
+		sb.append(URL
+				.encodeQueryString(arrival.getLat() + "," + arrival.getLon()));
 		DateTimeFormat df = DateTimeFormat.getFormat("yyyy/MM/dd");
 		DateTimeFormat tf = DateTimeFormat.getFormat("HH:mm:ss");
 		Date date = planRequest.getDate();
@@ -408,18 +416,18 @@ public class OtpPlannerProxy implements TransitPlannerProxy {
 		sb.append("&wheelchair=").append(planRequest.isWheelchairAccessible());
 		sb.append("&walkSpeed=").append(planRequest.getWalkSpeedKph());
 		sb.append("&bikeSpeed=").append(planRequest.getBikeSpeedKph());
-		sb.append("&transferPenalty=").append(
-				planRequest.getTransferPenaltySeconds());
-		sb.append("&triangleTimeFactor=").append(
-				planRequest.getBikeSpeedFactor());
-		sb.append("&triangleSafetyFactor=").append(
-				planRequest.getBikeSafetyFactor());
-		sb.append("&triangleSlopeFactor=").append(
-				planRequest.getBikeComfortFactor());
-		sb.append("&maxWalkDistance=").append(
-				planRequest.getMaxWalkDistanceMeters());
-		sb.append("&walkReluctance=").append(
-				planRequest.getWalkReluctanceFactor());
+		sb.append("&transferPenalty=")
+				.append(planRequest.getTransferPenaltySeconds());
+		sb.append("&triangleTimeFactor=")
+				.append(planRequest.getBikeSpeedFactor());
+		sb.append("&triangleSafetyFactor=")
+				.append(planRequest.getBikeSafetyFactor());
+		sb.append("&triangleSlopeFactor=")
+				.append(planRequest.getBikeComfortFactor());
+		sb.append("&maxWalkDistance=")
+				.append(planRequest.getMaxWalkDistanceMeters());
+		sb.append("&walkReluctance=")
+				.append(planRequest.getWalkReluctanceFactor());
 		sb.append("&numItineraries=").append(maxItineraries);
 		String retval = sb.toString();
 		// GWT.log("OTP request URL: " + retval);

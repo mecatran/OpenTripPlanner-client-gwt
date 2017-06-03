@@ -73,7 +73,8 @@ public class ItineraryWidget extends Composite {
 					@Override
 					public void onClick(ClickEvent event) {
 						event.stopPropagation();
-						listener.onItineraryCloseButtonClicked(ItineraryWidget.this);
+						listener.onItineraryCloseButtonClicked(
+								ItineraryWidget.this);
 					}
 				}, new ClickHandler() {
 					@Override
@@ -100,9 +101,10 @@ public class ItineraryWidget extends Composite {
 		itineraryTimeLineWidget = new ItineraryTimeLineWidget(itinerary);
 		openablePanel.add(itineraryTimeLineWidget);
 		itineraryTimeLineWidget.setVisible(false);
-		
+
 		// Details (not visible by default)
-		itineraryDetailsWidget = new ItineraryDetailsWidget(itinerary, listener);
+		itineraryDetailsWidget = new ItineraryDetailsWidget(itinerary,
+				listener);
 		itineraryDetailsWidget.addStyleName("itinerary-details-panel");
 		itineraryDetailsWidget.setVisible(false);
 		opened = false;

@@ -52,7 +52,7 @@ public interface PlannerMapWidget {
 	public void previewItineraryOnMap(ItineraryBean itinerary);
 
 	public void previewLocation(LocationBean location);
-	
+
 	public void updateDeparturePosition(Wgs84LatLonBean departurePosition,
 			boolean noAutoPan);
 

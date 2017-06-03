@@ -28,7 +28,10 @@ public interface GeocoderProxy {
 
 	public interface GeocoderListener {
 
-		/* Return null in case no geocoding available. Do we need an error callback? */
+		/*
+		 * Return null in case no geocoding available. Do we need an error
+		 * callback?
+		 */
 		public void onGeocodingDone(List<LocationBean> locations);
 	}
 

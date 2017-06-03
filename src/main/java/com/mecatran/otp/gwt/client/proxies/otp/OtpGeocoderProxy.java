@@ -52,14 +52,15 @@ public class OtpGeocoderProxy implements GeocoderProxy {
 
 					@Override
 					public void onSuccess(JsArray<OtpGeocodingResult> results) {
-						List<LocationBean> locations = new ArrayList<>(results
-								.length());
+						List<LocationBean> locations = new ArrayList<>(
+								results.length());
 						for (int i = 0; i < results.length(); i++) {
 							OtpGeocodingResult result = results.get(i);
 							LocationBean location = new LocationBean();
 							location.setAddress(result.getDescription());
-							location.setLocation(new Wgs84LatLonBean(result
-									.getLatitude(), result.getLongitude()));
+							location.setLocation(
+									new Wgs84LatLonBean(result.getLatitude(),
+											result.getLongitude()));
 							locations.add(location);
 						}
 						listener.onGeocodingDone(locations);

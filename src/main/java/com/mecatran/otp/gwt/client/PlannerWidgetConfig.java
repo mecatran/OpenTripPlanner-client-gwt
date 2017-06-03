@@ -37,7 +37,7 @@ public class PlannerWidgetConfig extends JavaScriptObject {
 	 */
 	public final native String getWidgetDivId()
 	/*-{
-		return this.widgetDivId || "opentripplanner_widget";
+	    return this.widgetDivId || "opentripplanner_widget";
 	}-*/;
 
 	/**
@@ -47,7 +47,7 @@ public class PlannerWidgetConfig extends JavaScriptObject {
 	 */
 	public final native String getLang()
 	/*-{
-		return this.lang || "en";
+	    return this.lang || "en";
 	}-*/;
 
 	/**
@@ -56,27 +56,27 @@ public class PlannerWidgetConfig extends JavaScriptObject {
 	 */
 	public final native String getMainCountryName()
 	/*-{
-		return this.mainCountryName || null;
+	    return this.mainCountryName || null;
 	}-*/;
 
 	public final native double getMinLat()
 	/*-{
-		return this.minLat || NaN;
+	    return this.minLat || NaN;
 	}-*/;
 
 	public final native double getMinLon()
 	/*-{
-		return this.minLon || NaN;
+	    return this.minLon || NaN;
 	}-*/;
 
 	public final native double getMaxLat()
 	/*-{
-		return this.maxLat || NaN;
+	    return this.maxLat || NaN;
 	}-*/;
 
 	public final native double getMaxLon()
 	/*-{
-		return this.maxLon || NaN;
+	    return this.maxLon || NaN;
 	}-*/;
 
 	/**
@@ -84,7 +84,7 @@ public class PlannerWidgetConfig extends JavaScriptObject {
 	 */
 	public final native String getProxyType()
 	/*-{
-		return this.proxyType || "otp";
+	    return this.proxyType || "otp";
 	}-*/;
 
 	/**
@@ -92,7 +92,7 @@ public class PlannerWidgetConfig extends JavaScriptObject {
 	 */
 	public final native String getRouterId()
 	/*-{
-		return this.router || "default";
+	    return this.router || "default";
 	}-*/;
 
 	/**
@@ -101,41 +101,41 @@ public class PlannerWidgetConfig extends JavaScriptObject {
 	 */
 	public final native String getOtpUrl()
 	/*-{
-		return this.otpUrl || "//localhost:8080/otp";
+	    return this.otpUrl || "//localhost:8080/otp";
 	}-*/;
 
 	public final native boolean isHasTransit()
 	/*-{
-		return this.hasTransit || true;
+	    return this.hasTransit || true;
 	}-*/;
 
 	public final native boolean isHasWalkOnly()
 	/*-{
-		return this.hasWalkOnly || false; 
+	    return this.hasWalkOnly || false;
 	}-*/;
 
 	public final native boolean isHasBikeOnly()
 	/*-{
-		return this.hasBikeOnly || false;
+	    return this.hasBikeOnly || false;
 	}-*/;
 
 	public final native boolean isHasBikeRental()
 	/*-{
-		return this.hasBikeRental || false;
+	    return this.hasBikeRental || false;
 	}-*/;
 
 	public final native boolean isHasBikeAndTransit()
 	/*-{
-		return this.hasBikeAndTransit || false;
+	    return this.hasBikeAndTransit || false;
 	}-*/;
 
 	public final native String getIntroMessage()
 	/*-{
-		return this.introMessage || null;
+	    return this.introMessage || null;
 	}-*/;
 
 	public final native int getMaxItineraries()
 	/*-{
-		return this.maxItineraries || 3;
+	    return this.maxItineraries || 3;
 	}-*/;
 }

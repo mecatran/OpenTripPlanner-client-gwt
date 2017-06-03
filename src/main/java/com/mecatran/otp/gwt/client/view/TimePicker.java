@@ -56,9 +56,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * 
  */
 @SuppressWarnings("deprecation")
-public class TimePicker extends Composite implements
-		HasValueChangeHandlers<Long>, HasValue<Long>, HasBlurHandlers,
-		Focusable {
+public class TimePicker extends Composite
+		implements HasValueChangeHandlers<Long>, HasValue<Long>,
+		HasBlurHandlers, Focusable {
 
 	private static final String STYLE_TIMEPICKER = "timePicker";
 	private static final String STYLE_TIMEPICKER_ENTRY = "timePickerEntry";

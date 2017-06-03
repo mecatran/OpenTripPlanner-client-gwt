@@ -104,8 +104,8 @@ public class OpenLayersItinerary {
 					layer1Style.setStrokeColor("#000000");
 					layer1Style.setStrokeOpacity(0.8 * opacity);
 					layer1Style.setStrokeWidth(6);
-					layer2Style.setStrokeColor(transitLeg.getRoute()
-							.getBackgroundColor());
+					layer2Style.setStrokeColor(
+							transitLeg.getRoute().getBackgroundColor());
 					layer2Style.setStrokeOpacity(1.0 * opacity);
 					layer2Style.setStrokeWidth(4);
 					break;
@@ -115,11 +115,11 @@ public class OpenLayersItinerary {
 					LonLat lonLat = convertLonLat(path[i]);
 					points[i] = new Point(lonLat.lon(), lonLat.lat());
 				}
-				VectorFeature layer2Feature = new VectorFeature(new LineString(
-						points), layer2Style);
+				VectorFeature layer2Feature = new VectorFeature(
+						new LineString(points), layer2Style);
 				vectorFeatures.add(0, layer2Feature);
-				VectorFeature layer1Feature = new VectorFeature(new LineString(
-						points), layer1Style);
+				VectorFeature layer1Feature = new VectorFeature(
+						new LineString(points), layer1Style);
 				vectorFeatures.add(0, layer1Feature);
 				if (layer3Style != null) {
 					VectorFeature layer3Feature = new VectorFeature(
@@ -209,60 +209,58 @@ public class OpenLayersItinerary {
 		ImageResource imageResource;
 		switch (mode) {
 		case WALK:
-			imageResource = leftish ? PlannerResources.INSTANCE
-					.modemaplWalkPng() : PlannerResources.INSTANCE
-					.modemaprWalkPng();
+			imageResource = leftish
+					? PlannerResources.INSTANCE.modemaplWalkPng()
+					: PlannerResources.INSTANCE.modemaprWalkPng();
 			break;
 		case BICYCLE:
 		case BICYCLE_RENTAL: // TODO Make dedicated icon
-			imageResource = leftish ? PlannerResources.INSTANCE
-					.modemaplBicyclePng() : PlannerResources.INSTANCE
-					.modemaprBicyclePng();
+			imageResource = leftish
+					? PlannerResources.INSTANCE.modemaplBicyclePng()
+					: PlannerResources.INSTANCE.modemaprBicyclePng();
 			break;
 		case BUS:
-			imageResource = leftish ? PlannerResources.INSTANCE
-					.modemaplBusPng() : PlannerResources.INSTANCE
-					.modemaprBusPng();
+			imageResource = leftish ? PlannerResources.INSTANCE.modemaplBusPng()
+					: PlannerResources.INSTANCE.modemaprBusPng();
 			break;
 		case CAR:
-			imageResource = leftish ? PlannerResources.INSTANCE
-					.modemaplCarPng() : PlannerResources.INSTANCE
-					.modemaprCarPng();
+			imageResource = leftish ? PlannerResources.INSTANCE.modemaplCarPng()
+					: PlannerResources.INSTANCE.modemaprCarPng();
 			break;
 		case FERRY:
-			imageResource = leftish ? PlannerResources.INSTANCE
-					.modemaplFerryPng() : PlannerResources.INSTANCE
-					.modemaprFerryPng();
+			imageResource = leftish
+					? PlannerResources.INSTANCE.modemaplFerryPng()
+					: PlannerResources.INSTANCE.modemaprFerryPng();
 			break;
 		case GONDOLA:
-			imageResource = leftish ? PlannerResources.INSTANCE
-					.modemaplGondolaPng() : PlannerResources.INSTANCE
-					.modemaprGondolaPng();
+			imageResource = leftish
+					? PlannerResources.INSTANCE.modemaplGondolaPng()
+					: PlannerResources.INSTANCE.modemaprGondolaPng();
 			break;
 		case PLANE:
-			imageResource = leftish ? PlannerResources.INSTANCE
-					.modemaplPlanePng() : PlannerResources.INSTANCE
-					.modemaprPlanePng();
+			imageResource = leftish
+					? PlannerResources.INSTANCE.modemaplPlanePng()
+					: PlannerResources.INSTANCE.modemaprPlanePng();
 			break;
 		case RAIL:
-			imageResource = leftish ? PlannerResources.INSTANCE
-					.modemaplRailPng() : PlannerResources.INSTANCE
-					.modemaprRailPng();
+			imageResource = leftish
+					? PlannerResources.INSTANCE.modemaplRailPng()
+					: PlannerResources.INSTANCE.modemaprRailPng();
 			break;
 		case SUBWAY:
-			imageResource = leftish ? PlannerResources.INSTANCE
-					.modemaplSubwayPng() : PlannerResources.INSTANCE
-					.modemaprSubwayPng();
+			imageResource = leftish
+					? PlannerResources.INSTANCE.modemaplSubwayPng()
+					: PlannerResources.INSTANCE.modemaprSubwayPng();
 			break;
 		case TRAM:
-			imageResource = leftish ? PlannerResources.INSTANCE
-					.modemaplTramPng() : PlannerResources.INSTANCE
-					.modemaprTramPng();
+			imageResource = leftish
+					? PlannerResources.INSTANCE.modemaplTramPng()
+					: PlannerResources.INSTANCE.modemaprTramPng();
 			break;
 		case TROLLEY:
-			imageResource = leftish ? PlannerResources.INSTANCE
-					.modemaplTrolleyPng() : PlannerResources.INSTANCE
-					.modemaprTrolleyPng();
+			imageResource = leftish
+					? PlannerResources.INSTANCE.modemaplTrolleyPng()
+					: PlannerResources.INSTANCE.modemaprTrolleyPng();
 			break;
 		default:
 			return null;

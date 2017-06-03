@@ -105,7 +105,8 @@ public class PlannerController implements PlannerWidgetListener,
 		plannerWidget.setGeocoderProxy(geocoderProxy);
 		startAddressReverseGeocoderListener = new ReverseGeocoderListener() {
 			@Override
-			public void onReverseGeocodingDone(LocationBean location, int factor) {
+			public void onReverseGeocodingDone(LocationBean location,
+					int factor) {
 				plannerWidget.setStartLocation(location, false);
 				if (autoPlanAfterGeocode > 0)
 					autoPlanAfterGeocode--;
@@ -115,7 +116,8 @@ public class PlannerController implements PlannerWidgetListener,
 		};
 		endAddressReverseGeocoderListener = new ReverseGeocoderListener() {
 			@Override
-			public void onReverseGeocodingDone(LocationBean location, int factor) {
+			public void onReverseGeocodingDone(LocationBean location,
+					int factor) {
 				plannerWidget.setEndLocation(location, false);
 				if (autoPlanAfterGeocode > 0)
 					autoPlanAfterGeocode--;
@@ -128,10 +130,10 @@ public class PlannerController implements PlannerWidgetListener,
 				&& !Double.isNaN(config.getMaxLat())
 				&& !Double.isNaN(config.getMaxLon())) {
 			Wgs84BoundsBean bounds = new Wgs84BoundsBean();
-			bounds.extend(new Wgs84LatLonBean(config.getMinLat(), config
-					.getMinLon()));
-			bounds.extend(new Wgs84LatLonBean(config.getMaxLat(), config
-					.getMaxLon()));
+			bounds.extend(new Wgs84LatLonBean(config.getMinLat(),
+					config.getMinLon()));
+			bounds.extend(new Wgs84LatLonBean(config.getMaxLat(),
+					config.getMaxLon()));
 			setBounds(bounds);
 		}
 	}
@@ -165,8 +167,8 @@ public class PlannerController implements PlannerWidgetListener,
 			plannerWidget.setDate(planRequestBean.getDate());
 		if (planRequestBean.getModes() != null)
 			plannerWidget.setModes(planRequestBean.getModes());
-		plannerWidget.setWheelchairAccessible(planRequestBean
-				.isWheelchairAccessible());
+		plannerWidget.setWheelchairAccessible(
+				planRequestBean.isWheelchairAccessible());
 	}
 
 	private void buildProxiesFromConfiguration(PlannerWidgetConfig config) {
@@ -177,8 +179,8 @@ public class PlannerController implements PlannerWidgetListener,
 					config.getRouterId(), config.getMaxItineraries());
 		} else {
 			Window.alert("Invalid proxy type: " + config.getProxyType());
-			throw new RuntimeException("Invalid proxy type: "
-					+ config.getProxyType());
+			throw new RuntimeException(
+					"Invalid proxy type: " + config.getProxyType());
 		}
 
 		/* Alert sources */
@@ -189,8 +191,8 @@ public class PlannerController implements PlannerWidgetListener,
 		/* Bike rental sources */
 		if (config.getProxyType().equals(PlannerWidgetConfig.PROXY_OTP)
 				&& config.isHasBikeRental()) {
-			poiSources.add(new OtpBikeRentalProxy(config.getOtpUrl(), config
-					.getRouterId()));
+			poiSources.add(new OtpBikeRentalProxy(config.getOtpUrl(),
+					config.getRouterId()));
 		}
 
 		/* POIs sources */
@@ -220,8 +222,8 @@ public class PlannerController implements PlannerWidgetListener,
 
 	private void setModeCapabilities(ModeCapabilitiesBean modeCapabilities) {
 		plannerWidget.setModeCapabilities(modeCapabilities);
-		plannerWidget.switchMapBackground(plannerWidget.getPlanRequestBean()
-				.getModes());
+		plannerWidget.switchMapBackground(
+				plannerWidget.getPlanRequestBean().getModes());
 	}
 
 	/* === PlannerWidgetListener === */
@@ -229,10 +231,10 @@ public class PlannerController implements PlannerWidgetListener,
 	@Override
 	public void onPlanningRequested() {
 		PlanRequestBean planRequest = plannerWidget.getPlanRequestBean();
-		boolean okDeparture = planRequest.getDeparture().isSet(
-				plannerProxy.isRequireGeocoding());
-		boolean okArrival = planRequest.getArrival().isSet(
-				plannerProxy.isRequireGeocoding());
+		boolean okDeparture = planRequest.getDeparture()
+				.isSet(plannerProxy.isRequireGeocoding());
+		boolean okArrival = planRequest.getArrival()
+				.isSet(plannerProxy.isRequireGeocoding());
 		if (!okDeparture || !okArrival) {
 			String message = "";
 			if (!okDeparture)
@@ -252,10 +254,10 @@ public class PlannerController implements PlannerWidgetListener,
 	private void planRouteIfPossible() {
 		PlanRequestBean planRequest = plannerWidget.getPlanRequestBean();
 		if (!busyPlanning
-				&& planRequest.getDeparture().isSet(
-						plannerProxy.isRequireGeocoding())
-				&& planRequest.getArrival().isSet(
-						plannerProxy.isRequireGeocoding())) {
+				&& planRequest.getDeparture()
+						.isSet(plannerProxy.isRequireGeocoding())
+				&& planRequest.getArrival()
+						.isSet(plannerProxy.isRequireGeocoding())) {
 			busyPlanning = true;
 			plannerWidget.setBusy(true);
 			plannerWidget.clearItineraries();
@@ -362,16 +364,17 @@ public class PlannerController implements PlannerWidgetListener,
 			setBounds(bounds);
 		}
 		if (modeCapabilities != null) {
-			modeCapabilities.setHasWalkOnly(modeCapabilities.isHasWalkOnly()
-					&& config.isHasWalkOnly());
-			modeCapabilities.setHasBikeOnly(modeCapabilities.isHasBikeOnly()
-					&& config.isHasBikeOnly());
-			modeCapabilities.setHasTransit(modeCapabilities.isHasTransit()
-					&& config.isHasTransit());
-			modeCapabilities.setHasBikeRental(modeCapabilities
-					.isHasBikeRental() && config.isHasBikeRental());
-			modeCapabilities.setHasBikeAndTransit(modeCapabilities
-					.isHasBikeAndTransit() && config.isHasBikeAndTransit());
+			modeCapabilities.setHasWalkOnly(
+					modeCapabilities.isHasWalkOnly() && config.isHasWalkOnly());
+			modeCapabilities.setHasBikeOnly(
+					modeCapabilities.isHasBikeOnly() && config.isHasBikeOnly());
+			modeCapabilities.setHasTransit(
+					modeCapabilities.isHasTransit() && config.isHasTransit());
+			modeCapabilities.setHasBikeRental(modeCapabilities.isHasBikeRental()
+					&& config.isHasBikeRental());
+			modeCapabilities
+					.setHasBikeAndTransit(modeCapabilities.isHasBikeAndTransit()
+							&& config.isHasBikeAndTransit());
 			setModeCapabilities(modeCapabilities);
 		}
 	}

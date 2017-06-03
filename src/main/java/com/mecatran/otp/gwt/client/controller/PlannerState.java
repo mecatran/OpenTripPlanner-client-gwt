@@ -116,8 +116,8 @@ public class PlannerState {
 		String value = getString(parameters, key);
 		if (value == null)
 			return null;
-		final String[] DATE_TIME_FORMATS = new String[] {
-				"yyyy/MM/dd@HH:mm:ss", "yyyy/MM/dd@HH:mm" };
+		final String[] DATE_TIME_FORMATS = new String[] { "yyyy/MM/dd@HH:mm:ss",
+				"yyyy/MM/dd@HH:mm" };
 		final String[] TIME_FORMATS = new String[] { "HH:mm:ss", "HH:mm" };
 		for (String format : DATE_TIME_FORMATS) {
 			DateTimeFormat dtf = DateTimeFormat.getFormat(format);
@@ -144,7 +144,8 @@ public class PlannerState {
 		return null;
 	}
 
-	private Boolean getBoolean(Map<String, List<String>> parameters, String key) {
+	private Boolean getBoolean(Map<String, List<String>> parameters,
+			String key) {
 		String value = getString(parameters, key);
 		if (value == null)
 			return null;
@@ -195,8 +196,9 @@ public class PlannerState {
 			urlBuilder.setParameter("destination",
 					getLocationAsStringParam(planRequest.getArrival()));
 		DateTimeFormat dtf = DateTimeFormat.getFormat("yyyy/MM/dd@HH:mm");
-		urlBuilder.setParameter(planRequest.isDateDeparture() ? "depart"
-				: "arrive", dtf.format(planRequest.getDate()));
+		urlBuilder.setParameter(
+				planRequest.isDateDeparture() ? "depart" : "arrive",
+				dtf.format(planRequest.getDate()));
 		if (planRequest.isWheelchairAccessible())
 			urlBuilder.setParameter("wheelchair", "y");
 		Set<TransportMode> modes = planRequest.getModes();

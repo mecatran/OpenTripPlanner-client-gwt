@@ -85,8 +85,8 @@ public class ItineraryDetailsWidget extends Composite {
 				rootPanel.add(getTransitDetails(leg.getAsTransitLeg()));
 				break;
 			default:
-				throw new IllegalArgumentException("Unsupported leg type: "
-						+ leg.getTravelType());
+				throw new IllegalArgumentException(
+						"Unsupported leg type: " + leg.getTravelType());
 			}
 		}
 
@@ -155,10 +155,9 @@ public class ItineraryDetailsWidget extends Composite {
 		// Duration and distance + details link
 		FlowPanel distanceAndLinkPanel = new FlowPanel();
 		rootPanel.add(distanceAndLinkPanel);
-		HTML distanceDurationLabel = new HTML(FormatUtils.formatDistance(leg
-				.getDistanceMeters())
-				+ " - "
-				+ FormatUtils.formatDuration(leg.getDurationSeconds()));
+		HTML distanceDurationLabel = new HTML(
+				FormatUtils.formatDistance(leg.getDistanceMeters()) + " - "
+						+ FormatUtils.formatDuration(leg.getDurationSeconds()));
 		distanceDurationLabel
 				.addStyleName("itinerary-details-road-second-line");
 		distanceAndLinkPanel.add(distanceDurationLabel);
@@ -181,12 +180,15 @@ public class ItineraryDetailsWidget extends Composite {
 			}
 			// TODO Use templating
 			String html = step.getInstructions()
-					+ (step.getDistanceMeters() >= 5 ? " <span class='distance'>("
-							+ FormatUtils.formatDistance(step
-									.getDistanceMeters())
-							+ " - "
-							+ FormatUtils.formatDuration(step
-									.getDurationSeconds()) + ")</span>" : "");
+					+ (step.getDistanceMeters() >= 5
+							? " <span class='distance'>("
+									+ FormatUtils.formatDistance(
+											step.getDistanceMeters())
+									+ " - "
+									+ FormatUtils.formatDuration(
+											step.getDurationSeconds())
+									+ ")</span>"
+							: "");
 			final String infoHtml = "<div class='info-panel-road-step'>" + html
 					+ "</div>";
 			final Wgs84LatLonBean startLocation = step.getStartLocation();
@@ -197,7 +199,8 @@ public class ItineraryDetailsWidget extends Composite {
 				@Override
 				public void onMouseOver(MouseOverEvent event) {
 					if (selected)
-						listener.onItineraryStepClicked(infoHtml, startLocation);
+						listener.onItineraryStepClicked(infoHtml,
+								startLocation);
 				}
 			});
 			detailsPanel.add(stepLabel);
@@ -209,12 +212,12 @@ public class ItineraryDetailsWidget extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				if (detailsPanel.isVisible()) {
-					showHideDetailsLink.setText(I18nUtils
-							.tr("show.road.details"));
+					showHideDetailsLink
+							.setText(I18nUtils.tr("show.road.details"));
 					detailsPanel.setVisible(false);
 				} else {
-					showHideDetailsLink.setText(I18nUtils
-							.tr("hide.road.details"));
+					showHideDetailsLink
+							.setText(I18nUtils.tr("hide.road.details"));
 					detailsPanel.setVisible(true);
 				}
 				event.stopPropagation();

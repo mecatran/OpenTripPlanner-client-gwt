@@ -60,7 +60,8 @@ public class HttpUtils {
 			final DownloadListener<T> listener,
 			final DataConverter<T> converter, int timeoutMs) {
 		try {
-			RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
+			RequestBuilder builder = new RequestBuilder(RequestBuilder.GET,
+					url);
 			builder.setTimeoutMillis(timeoutMs);
 			builder.setHeader("Accept", contentType);
 			builder.sendRequest(null, new RequestCallback() {

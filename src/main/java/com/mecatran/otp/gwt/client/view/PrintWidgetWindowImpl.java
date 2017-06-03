@@ -63,7 +63,8 @@ public class PrintWidgetWindowImpl implements PrintWidget {
 	}
 
 	@Override
-	public void setPrintWidgetListener(PrintWidgetListener printWidgetListener) {
+	public void setPrintWidgetListener(
+			PrintWidgetListener printWidgetListener) {
 		this.printWidgetListener = printWidgetListener;
 	}
 
@@ -117,15 +118,13 @@ public class PrintWidgetWindowImpl implements PrintWidget {
 					.append(", ");
 		}
 		if (walkDistanceMeter > 0) {
-			infoHtml.append(
-					I18nUtils.tr("print.summary.walk.distance",
-							FormatUtils.formatDistance(walkDistanceMeter)))
+			infoHtml.append(I18nUtils.tr("print.summary.walk.distance",
+					FormatUtils.formatDistance(walkDistanceMeter)))
 					.append(", ");
 		}
 		if (bikeDistanceMeter > 0) {
-			infoHtml.append(
-					I18nUtils.tr("print.summary.bike.distance",
-							FormatUtils.formatDistance(bikeDistanceMeter)))
+			infoHtml.append(I18nUtils.tr("print.summary.bike.distance",
+					FormatUtils.formatDistance(bikeDistanceMeter)))
 					.append(", ");
 		}
 		// Remove last comma
@@ -151,15 +150,14 @@ public class PrintWidgetWindowImpl implements PrintWidget {
 				rootPanel.add(getTransitDetails((ItineraryTransitLegBean) leg));
 				break;
 			default:
-				throw new IllegalArgumentException("Unsupported leg type: "
-						+ leg.getTravelType());
+				throw new IllegalArgumentException(
+						"Unsupported leg type: " + leg.getTravelType());
 			}
 		}
 		/* Arrival */
-		rootPanel.add(new HTML("<h3>"
-				+ I18nUtils.tr("print.step.arrival",
-						FormatUtils.formatTime(itinerary.getArrivalTime()),
-						FormatUtils.formatAddress(itinerary.getEndAddress()))
+		rootPanel.add(new HTML("<h3>" + I18nUtils.tr("print.step.arrival",
+				FormatUtils.formatTime(itinerary.getArrivalTime()),
+				FormatUtils.formatAddress(itinerary.getEndAddress()))
 				+ "</h3>"));
 
 		openWindow(rootPanel.getElement());
@@ -205,15 +203,15 @@ public class PrintWidgetWindowImpl implements PrintWidget {
 	 */
 	public static native BodyElement openWindow(String printLabel,
 			String cssContent) /*-{
-        var win = window.open("", "win", "width=940,height=400,status=1,resizeable=1,scrollbars=1");
-        win.document.open("text/html", "replace");
-        win.document.write("<html><head><style>\n" + cssContent
-                + "\n</style></head><body><div><button onclick='window.print()'>" + printLabel
-                + "</button></div><div id='printarea'/></body></html>");
-        win.document.close();
-        win.focus();
-        return win.document.body;
-	}-*/;
+								var win = window.open("", "win", "width=940,height=400,status=1,resizeable=1,scrollbars=1");
+								win.document.open("text/html", "replace");
+								win.document.write("<html><head><style>\n" + cssContent
+								+ "\n</style></head><body><div><button onclick='window.print()'>" + printLabel
+								+ "</button></div><div id='printarea'/></body></html>");
+								win.document.close();
+								win.focus();
+								return win.document.body;
+								}-*/;
 
 	private Widget getRoadDetails(ItineraryRoadLegBean leg) {
 		FlowPanel line = new FlowPanel();
@@ -231,15 +229,14 @@ public class PrintWidgetWindowImpl implements PrintWidget {
 				// Can happen in case of transfers between two transit legs
 				continue;
 			}
-			stepsHtml
-					.append("<li>")
-					.append(step.getInstructions())
+			stepsHtml.append("<li>").append(step.getInstructions())
 					.append((step.getDistanceMeters() >= 5 ? " ("
-							+ FormatUtils.formatDistance(step
-									.getDistanceMeters())
+							+ FormatUtils
+									.formatDistance(step.getDistanceMeters())
 							+ " - "
-							+ FormatUtils.formatDuration(step
-									.getDurationSeconds()) + ")" : ""))
+							+ FormatUtils.formatDuration(
+									step.getDurationSeconds())
+							+ ")" : ""))
 					.append("</li>");
 		}
 
@@ -267,16 +264,16 @@ public class PrintWidgetWindowImpl implements PrintWidget {
 				+ route.getForegroundColor() + "; background-color:"
 				+ route.getBackgroundColor() + "'>&nbsp;" + route.getCode()
 				+ "&nbsp;</span></b>";
-		line.add(new HTML("<h3>"
-				+ I18nUtils.tr("print.take.the.route", codeHtml, FormatUtils
-						.formatTime(leg.getDepartureTime()), leg
-						.getDepartureStop().getName(), leg.getHeadsign())
+		line.add(new HTML("<h3>" + I18nUtils.tr("print.take.the.route",
+				codeHtml, FormatUtils.formatTime(leg.getDepartureTime()),
+				leg.getDepartureStop().getName(), leg.getHeadsign())
 				+ "</h3>"));
-		line.add(new HTML("<h3>"
-				+ I18nUtils.tr("print.hop.off", "<span class='time'>"
-						+ FormatUtils.formatTime(leg.getArrivalTime())
-						+ "</span>", leg.getArrivalStop().getName())
-				+ "\"</h3>"));
+		line.add(
+				new HTML("<h3>"
+						+ I18nUtils.tr("print.hop.off", "<span class='time'>"
+								+ FormatUtils.formatTime(leg.getArrivalTime())
+								+ "</span>", leg.getArrivalStop().getName())
+						+ "\"</h3>"));
 		return line;
 	}
 
@@ -294,12 +291,11 @@ public class PrintWidgetWindowImpl implements PrintWidget {
 				je = path.length;
 			boolean start = i == 0;
 			boolean end = je == path.length;
-			urlBuilder
-					.append("http://maps.googleapis.com/maps/api/staticmap?sensor=false&scale=2&size=800x800&maptype=roadmap");
+			urlBuilder.append(
+					"http://maps.googleapis.com/maps/api/staticmap?sensor=false&scale=2&size=800x800&maptype=roadmap");
 			if (start)
 				urlBuilder.append("&markers=")
-						.append(dec5Format.format(path[0].getLat()))
-						.append(",")
+						.append(dec5Format.format(path[0].getLat())).append(",")
 						.append(dec5Format.format(path[0].getLon()));
 			if (end && !start)
 				urlBuilder.append("&markers=");
@@ -307,11 +303,10 @@ public class PrintWidgetWindowImpl implements PrintWidget {
 				urlBuilder.append("|");
 			if (end)
 				urlBuilder
-						.append(dec5Format.format(path[path.length - 1]
-								.getLat()))
-						.append(",")
-						.append(dec5Format.format(path[path.length - 1]
-								.getLon()));
+						.append(dec5Format
+								.format(path[path.length - 1].getLat()))
+						.append(",").append(dec5Format
+								.format(path[path.length - 1].getLon()));
 			urlBuilder.append("&path=color:blue|enc:");
 			Wgs84LatLonBean[] subPath = new Wgs84LatLonBean[je - js];
 			// GWT does not have Arrays.copyOfRange() ...

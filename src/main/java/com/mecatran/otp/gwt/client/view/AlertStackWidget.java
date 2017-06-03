@@ -42,15 +42,15 @@ public class AlertStackWidget extends Composite {
 		alertsPanel = new VerticalPanel();
 		alertsPanel.setWidth("100%");
 		rootPanel.add(alertsPanel);
-		showHideAnchor = new Anchor(I18nUtils.tr(visible ? "hide.alerts"
-				: "show.alerts"));
+		showHideAnchor = new Anchor(
+				I18nUtils.tr(visible ? "hide.alerts" : "show.alerts"));
 		showHideAnchor.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				visible = !visible;
 				alertsPanel.setVisible(visible);
-				showHideAnchor.setText(I18nUtils.tr(visible ? "hide.alerts"
-						: "show.alerts"));
+				showHideAnchor.setText(
+						I18nUtils.tr(visible ? "hide.alerts" : "show.alerts"));
 			}
 		});
 		showHideAnchor.addStyleName("alert-showhide-link");

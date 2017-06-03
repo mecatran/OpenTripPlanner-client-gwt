@@ -21,8 +21,8 @@ package com.mecatran.otp.gwt.client.i18n;
 /**
  * 
  */
-public class OpenTripPlannerClientMessagesEn extends
-		OpenTripPlannerClientMessages {
+public class OpenTripPlannerClientMessagesEn
+		extends OpenTripPlannerClientMessages {
 
 	public OpenTripPlannerClientMessagesEn() {
 		add("ok", "OK");

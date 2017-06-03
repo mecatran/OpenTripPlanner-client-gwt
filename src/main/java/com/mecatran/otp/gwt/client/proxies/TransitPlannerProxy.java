@@ -33,7 +33,8 @@ public interface TransitPlannerProxy {
 
 		public void onItineraryError(String errorMessage);
 
-		public void onPlannerConfigured(Wgs84BoundsBean bounds, ModeCapabilitiesBean modeCapabilities);
+		public void onPlannerConfigured(Wgs84BoundsBean bounds,
+				ModeCapabilitiesBean modeCapabilities);
 	}
 
 	public boolean isRequireGeocoding();

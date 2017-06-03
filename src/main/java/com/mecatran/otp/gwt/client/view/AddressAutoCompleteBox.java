@@ -85,7 +85,8 @@ public class AddressAutoCompleteBox extends Composite implements AddressBox {
 	}
 
 	@Override
-	public void setAddressSuggestBoxListener(AddressSuggestBoxListener listener) {
+	public void setAddressSuggestBoxListener(
+			AddressSuggestBoxListener listener) {
 		this.listener = listener;
 	}
 
@@ -140,13 +141,13 @@ public class AddressAutoCompleteBox extends Composite implements AddressBox {
 						for (LocationBean location : locations) {
 							if (n >= request.getLimit())
 								break;
-							suggestions.add(new GeocodedAddressSuggestion(
-									location));
+							suggestions.add(
+									new GeocodedAddressSuggestion(location));
 							n++;
 						}
 						if (locations.size() > n)
-							response.setMoreSuggestionsCount(locations.size()
-									- n);
+							response.setMoreSuggestionsCount(
+									locations.size() - n);
 					}
 					response.setSuggestions(suggestions);
 					callback.onSuggestionsReady(request, response);

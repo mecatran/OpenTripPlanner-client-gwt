@@ -67,8 +67,8 @@ public class AlertWidget extends Composite {
 		collapsibleInnerPanel.addStyleName("alert-details-inner");
 		if (DISPLAY_ALERT_DATE && alert.isPublishActiveRange()
 				&& (alert.getFrom() != null || alert.getTo() != null)) {
-			Label dateRangeLabel = new Label(formatDateRange(alert.getFrom(),
-					alert.getTo()));
+			Label dateRangeLabel = new Label(
+					formatDateRange(alert.getFrom(), alert.getTo()));
 			collapsibleInnerPanel.add(dateRangeLabel);
 			dateRangeLabel.addStyleName("alert-datetime");
 		}

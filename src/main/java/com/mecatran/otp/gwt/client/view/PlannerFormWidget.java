@@ -46,8 +46,8 @@ import com.mecatran.otp.gwt.client.view.AddressBox.AddressSuggestBoxListener;
 import com.mecatran.otp.gwt.client.view.ModeSelectorWidget.ModeSelectorListener;
 import com.mecatran.otp.gwt.client.view.PlannerWidget.PlannerWidgetListener;
 
-public class PlannerFormWidget extends Composite implements
-		ModeSelectorListener {
+public class PlannerFormWidget extends Composite
+		implements ModeSelectorListener {
 
 	private AddressBox departureSuggestBox;
 	private AddressBox arrivalSuggestBox;
@@ -203,11 +203,12 @@ public class PlannerFormWidget extends Composite implements
 		retval.setModes(modeSelector.getSelectedModes());
 		retval.setWalkSpeedKph(modeSelector.getWalkSpeedKph());
 		retval.setBikeSpeedKph(modeSelector.getBikeSpeedKph());
-		retval.setMaxWalkDistanceMeters(modeSelector.getMaxWalkDistanceMeters());
+		retval.setMaxWalkDistanceMeters(
+				modeSelector.getMaxWalkDistanceMeters());
 		retval.setWalkReluctanceFactor(modeSelector.getWalkReluctanceFactor());
 		retval.setWheelchairAccessible(modeSelector.isWheelchairAccessible());
-		retval.setTransferPenaltySeconds(modeSelector
-				.getTransferPenaltySeconds());
+		retval.setTransferPenaltySeconds(
+				modeSelector.getTransferPenaltySeconds());
 		retval.setBikeSpeedFactor(modeSelector.getBikeSpeedFactor());
 		retval.setBikeSafetyFactor(modeSelector.getBikeSafetyFactor());
 		retval.setBikeComfortFactor(modeSelector.getBikeComfortFactor());

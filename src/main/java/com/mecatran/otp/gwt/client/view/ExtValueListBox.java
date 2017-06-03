@@ -88,8 +88,8 @@ public class ExtValueListBox<T> extends ListBox {
 	public T getExtValue(int index) {
 		if (index >= 0 && index < valueItems.size())
 			return valueItems.get(index).getValue();
-		throw new IndexOutOfBoundsException(index + " out of bounds [0.."
-				+ valueItems.size() + "]");
+		throw new IndexOutOfBoundsException(
+				index + " out of bounds [0.." + valueItems.size() + "]");
 	}
 
 	@Override

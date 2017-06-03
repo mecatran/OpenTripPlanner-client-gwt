@@ -95,8 +95,8 @@ public class PlannerWidgetImpl extends Composite implements PlannerWidget,
 			leftPanelWidget.getElement().getParentElement().getStyle()
 					.setOverflow(Overflow.AUTO);
 		}
-		screenWidget.insert(plannerMapWidget.getAsWidget(), Direction.CENTER,
-				0, null);
+		screenWidget.insert(plannerMapWidget.getAsWidget(), Direction.CENTER, 0,
+				null);
 		rootPanel.add(screenWidget);
 		rootPanel.showWidget(screenWidget);
 		rootPanel.setSize("100%", "100%");
@@ -131,8 +131,8 @@ public class PlannerWidgetImpl extends Composite implements PlannerWidget,
 
 	@Override
 	public void onItineraryPrintButtonClicked(ItineraryWidget itineraryWidget) {
-		plannerWidgetListener.onItineraryPrintRequest(itineraryWidget
-				.getItinerary());
+		plannerWidgetListener
+				.onItineraryPrintRequest(itineraryWidget.getItinerary());
 	}
 
 	@Override
@@ -141,10 +141,11 @@ public class PlannerWidgetImpl extends Composite implements PlannerWidget,
 	}
 
 	@Override
-	public void onItineraryHover(ItineraryWidget itineraryWidget, boolean start) {
+	public void onItineraryHover(ItineraryWidget itineraryWidget,
+			boolean start) {
 		if (start)
-			plannerWidgetListener.onItineraryHover(itineraryWidget
-					.getItinerary());
+			plannerWidgetListener
+					.onItineraryHover(itineraryWidget.getItinerary());
 		else
 			plannerWidgetListener.onItineraryHover(null);
 	}
@@ -307,8 +308,8 @@ public class PlannerWidgetImpl extends Composite implements PlannerWidget,
 		}
 		selectedItineraryWidget = itineraryWidget;
 		selectedItineraryWidget.setSelected(true);
-		plannerWidgetListener.onItinerarySelected(itineraryWidget
-				.getItinerary());
+		plannerWidgetListener
+				.onItinerarySelected(itineraryWidget.getItinerary());
 	}
 
 	@Override

@@ -81,11 +81,11 @@ public class ItineraryTransitLegBean extends ItineraryLegBean {
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
 	}
-	
+
 	public long getWaitDurationSeconds() {
 		return waitDurationSeconds;
 	}
-	
+
 	public void setWaitDurationSeconds(long waitDurationSeconds) {
 		this.waitDurationSeconds = waitDurationSeconds;
 	}
@@ -110,7 +110,7 @@ public class ItineraryTransitLegBean extends ItineraryLegBean {
 	public TravelType getTravelType() {
 		return TravelType.TRANSIT;
 	}
-	
+
 	@Override
 	public ItineraryTransitLegBean getAsTransitLeg() {
 		return this;

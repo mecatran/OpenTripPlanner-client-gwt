@@ -58,8 +58,8 @@ public class POIUtils {
 		poiTypeToLayerTypeMap.put(POIType.COMMERCIAL_SHOPPING_CENTER,
 				POILayerType.COMMERCIAL);
 		poiTypeToLayerTypeMap.put(POIType.CULTURE_CASTLE, POILayerType.CULTURE);
-		poiTypeToLayerTypeMap
-				.put(POIType.CULTURE_LIBRARY, POILayerType.CULTURE);
+		poiTypeToLayerTypeMap.put(POIType.CULTURE_LIBRARY,
+				POILayerType.CULTURE);
 		poiTypeToLayerTypeMap.put(POIType.CULTURE_MONUMENT,
 				POILayerType.CULTURE);
 		poiTypeToLayerTypeMap.put(POIType.CULTURE_MOVIE_THEATER,
@@ -68,8 +68,8 @@ public class POIUtils {
 		poiTypeToLayerTypeMap.put(POIType.CULTURE_NEWSPAPERS,
 				POILayerType.CULTURE);
 		poiTypeToLayerTypeMap.put(POIType.CULTURE_RUINS, POILayerType.CULTURE);
-		poiTypeToLayerTypeMap
-				.put(POIType.CULTURE_THEATER, POILayerType.CULTURE);
+		poiTypeToLayerTypeMap.put(POIType.CULTURE_THEATER,
+				POILayerType.CULTURE);
 		poiTypeToLayerTypeMap.put(POIType.EMERGENCY_FIRE_STATION,
 				POILayerType.EMERGENCY);
 		poiTypeToLayerTypeMap.put(POIType.EMERGENCY_HOSPITAL,
@@ -85,8 +85,8 @@ public class POIUtils {
 		poiTypeToLayerTypeMap.put(POIType.PUBLIC_CULT, POILayerType.PUBLIC);
 		poiTypeToLayerTypeMap.put(POIType.PUBLIC_POST_OFFICE,
 				POILayerType.PUBLIC);
-		poiTypeToLayerTypeMap
-				.put(POIType.PUBLIC_TOWN_HALL, POILayerType.PUBLIC);
+		poiTypeToLayerTypeMap.put(POIType.PUBLIC_TOWN_HALL,
+				POILayerType.PUBLIC);
 		poiTypeToLayerTypeMap.put(POIType.SPORT_GOLF, POILayerType.SPORT);
 		poiTypeToLayerTypeMap.put(POIType.SPORT_STADIUM, POILayerType.SPORT);
 		poiTypeToLayerTypeMap.put(POIType.SPORT_SWIMMING_POOL,
@@ -132,8 +132,8 @@ public class POIUtils {
 		poiTypeToImgRsc.put(POIType.COMMERCIAL_ATM, pr.poimapAtmPng());
 		poiTypeToImgRsc.put(POIType.COMMERCIAL_BANK, pr.poimapBankPng());
 		poiTypeToImgRsc.put(POIType.COMMERCIAL_CAFE, pr.poimapCafePng());
-		poiTypeToImgRsc
-				.put(POIType.COMMERCIAL_FASTFOOD, pr.poimapFastfoodPng());
+		poiTypeToImgRsc.put(POIType.COMMERCIAL_FASTFOOD,
+				pr.poimapFastfoodPng());
 		poiTypeToImgRsc.put(POIType.COMMERCIAL_RESTAURANT,
 				pr.poimapRestaurantPng());
 		poiTypeToImgRsc.put(POIType.COMMERCIAL_SHOPPING_CENTER,
@@ -141,8 +141,8 @@ public class POIUtils {
 		poiTypeToImgRsc.put(POIType.CULTURE_CASTLE, pr.poimapMuseumPng());
 		poiTypeToImgRsc.put(POIType.CULTURE_LIBRARY, pr.poimapMuseumPng());
 		poiTypeToImgRsc.put(POIType.CULTURE_MONUMENT, pr.poimapMuseumPng());
-		poiTypeToImgRsc
-				.put(POIType.CULTURE_MOVIE_THEATER, pr.poimapMuseumPng());
+		poiTypeToImgRsc.put(POIType.CULTURE_MOVIE_THEATER,
+				pr.poimapMuseumPng());
 		poiTypeToImgRsc.put(POIType.CULTURE_MUSEUM, pr.poimapMuseumPng());
 		poiTypeToImgRsc.put(POIType.CULTURE_NEWSPAPERS, pr.poimapMuseumPng());
 		poiTypeToImgRsc.put(POIType.CULTURE_RUINS, pr.poimapMuseumPng());
@@ -158,8 +158,8 @@ public class POIUtils {
 				pr.poimapPublicToiletsPng());
 		poiTypeToImgRsc.put(POIType.INFRA_RECYCLING, pr.poimapGenericPng());
 		poiTypeToImgRsc.put(POIType.PUBLIC_CULT, pr.poimapGenericPng());
-		poiTypeToImgRsc
-				.put(POIType.PUBLIC_POST_OFFICE, pr.poimapLetterboxPng());
+		poiTypeToImgRsc.put(POIType.PUBLIC_POST_OFFICE,
+				pr.poimapLetterboxPng());
 		poiTypeToImgRsc.put(POIType.PUBLIC_TOWN_HALL, pr.poimapMuseumPng());
 		poiTypeToImgRsc.put(POIType.SPORT_GOLF, pr.poimapGolfPng());
 		poiTypeToImgRsc.put(POIType.SPORT_STADIUM, pr.poimapStadiumPng());
@@ -170,14 +170,14 @@ public class POIUtils {
 				pr.poimapHotelPng());
 		poiTypeToImgRsc.put(POIType.TOURISM_CAMPSITE, pr.poimapCampsitePng());
 		poiTypeToImgRsc.put(POIType.TOURISM_HOTEL, pr.poimapHotelPng());
-		poiTypeToImgRsc
-				.put(POIType.TOURISM_INFO_POINT, pr.poimapInfoPointPng());
+		poiTypeToImgRsc.put(POIType.TOURISM_INFO_POINT,
+				pr.poimapInfoPointPng());
 		poiTypeToImgRsc.put(POIType.TOURISM_PARK, pr.poimapParkPng());
 		poiTypeToImgRsc.put(POIType.TOURISM_PICNIC, pr.poimapParkPng());
 		poiTypeToImgRsc.put(POIType.TOURISM_YOUTH_HOSTEL, pr.poimapHotelPng());
 		poiTypeToImgRsc.put(POIType.TRANSPORT_AIRPORT, pr.poimapAirportPng());
-		poiTypeToImgRsc
-				.put(POIType.TRANSPORT_BIKE_PARK, pr.poimapBikeParkPng());
+		poiTypeToImgRsc.put(POIType.TRANSPORT_BIKE_PARK,
+				pr.poimapBikeParkPng());
 		poiTypeToImgRsc.put(POIType.TRANSPORT_BIKE_RENTAL_STATION,
 				pr.poimapBikeRentalPng());
 		poiTypeToImgRsc.put(POIType.TRANSPORT_BUS_STATION,
@@ -193,8 +193,8 @@ public class POIUtils {
 				pr.poimapParkAndRidePng());
 		poiTypeToImgRsc.put(POIType.TRANSPORT_RAIL_STATION,
 				pr.poimapRailwayStationPng());
-		poiTypeToImgRsc
-				.put(POIType.TRANSPORT_STATION, pr.poimapBusStationPng());
+		poiTypeToImgRsc.put(POIType.TRANSPORT_STATION,
+				pr.poimapBusStationPng());
 	}
 
 	/** Return the layer ID for a specific POI type */

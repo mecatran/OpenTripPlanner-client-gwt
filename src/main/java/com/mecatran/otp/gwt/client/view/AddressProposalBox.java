@@ -141,7 +141,8 @@ public class AddressProposalBox extends Composite implements AddressBox {
 	}
 
 	@Override
-	public void setAddressSuggestBoxListener(AddressSuggestBoxListener listener) {
+	public void setAddressSuggestBoxListener(
+			AddressSuggestBoxListener listener) {
 		this.listener = listener;
 	}
 
@@ -188,8 +189,8 @@ public class AddressProposalBox extends Composite implements AddressBox {
 					location.setLocation(null);
 					listener.onLocationSelected(location);
 					geocodeRecursiveMutex--;
-					Label noAddressFound = new Label(I18nUtils
-							.tr("address.not.found"));
+					Label noAddressFound = new Label(
+							I18nUtils.tr("address.not.found"));
 					noAddressFound.addStyleName("warn-icon");
 					noAddressFound.addStyleName("no-address-found");
 					proposalPanel.add(noAddressFound);
@@ -203,8 +204,8 @@ public class AddressProposalBox extends Composite implements AddressBox {
 					// Several answers: make a proposal
 					// And wait for the user to select one.
 					int n = 0;
-					Label severalAddressFound = new Label(I18nUtils
-							.tr("several.address.matches"));
+					Label severalAddressFound = new Label(
+							I18nUtils.tr("several.address.matches"));
 					severalAddressFound.addStyleName("several-address-found");
 					proposalPanel.add(severalAddressFound);
 					for (LocationBean location : locations) {

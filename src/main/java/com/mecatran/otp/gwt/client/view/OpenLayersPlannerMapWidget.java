@@ -75,8 +75,8 @@ import com.mecatran.otp.gwt.client.model.Wgs84LatLonBean;
 import com.mecatran.otp.gwt.client.proxies.POISource;
 import com.mecatran.otp.gwt.client.view.POIUtils.POILayerType;
 
-public class OpenLayersPlannerMapWidget extends Composite implements
-		PlannerMapWidget {
+public class OpenLayersPlannerMapWidget extends Composite
+		implements PlannerMapWidget {
 
 	private static final Projection WGS84_PROJECTION = new Projection(
 			"EPSG:4326");
@@ -124,8 +124,7 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 			XYZOptions cloudmadeOptions = new XYZOptions();
 			cloudmadeOptions.setIsBaseLayer(true);
 			cloudmadeOptions.setSphericalMercator(true);
-			XYZ cloudmadeLayer = new XYZ(
-					"Cloudmade",
+			XYZ cloudmadeLayer = new XYZ("Cloudmade",
 					"http://tile.cloudmade.com/YOUR_KEY_HERE/99823/256/${z}/${x}/${y}.png",
 					cloudmadeOptions);
 			map.addLayer(cloudmadeLayer);
@@ -133,10 +132,9 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 
 		// MapQuest open
 		OSMOptions mapQuestOptions = new OSMOptions();
-		mapQuestOptions
-				.setAttribution("Tiles Courtesy of <a href='http://www.mapquest.com/' target='_blank'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png'>. Map data provided by <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> and contributors, <a href='http://wiki.openstreetmap.org/wiki/Legal_FAQ'>ODbL</a>.");
-		OSM mapQuest = new OSM(
-				I18nUtils.tr("layer.mapquest.street"),
+		mapQuestOptions.setAttribution(
+				"Tiles Courtesy of <a href='http://www.mapquest.com/' target='_blank'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png'>. Map data provided by <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> and contributors, <a href='http://wiki.openstreetmap.org/wiki/Legal_FAQ'>ODbL</a>.");
+		OSM mapQuest = new OSM(I18nUtils.tr("layer.mapquest.street"),
 				new String[] {
 						"http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
 						"http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
@@ -155,10 +153,9 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 		XYZOptions thunderforestOptions = new XYZOptions();
 		thunderforestOptions.setIsBaseLayer(true);
 		thunderforestOptions.setSphericalMercator(true);
-		thunderforestOptions
-				.setAttribution("Copyright CC-BY-SA 2.0 <a href='www.openstreetmap.org'>OpenStreetMap</a> and <a href='www.thunderforest.com'>Thunderforest</a>");
-		XYZ transportLayer = new XYZ(
-				"Transport",
+		thunderforestOptions.setAttribution(
+				"Copyright CC-BY-SA 2.0 <a href='www.openstreetmap.org'>OpenStreetMap</a> and <a href='www.thunderforest.com'>Thunderforest</a>");
+		XYZ transportLayer = new XYZ("Transport",
 				new String[] {
 						"http://a.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png",
 						"http://b.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png",
@@ -166,8 +163,7 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 				thunderforestOptions);
 		map.addLayer(transportLayer);
 		// Outdoor
-		XYZ outdoorLayer = new XYZ(
-				"Outdoor",
+		XYZ outdoorLayer = new XYZ("Outdoor",
 				new String[] {
 						"http://a.tile.thunderforest.com/outdoors/${z}/${x}/${y}.png",
 						"http://b.tile.thunderforest.com/outdoors/${z}/${x}/${y}.png",
@@ -175,8 +171,7 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 				thunderforestOptions);
 		map.addLayer(outdoorLayer);
 		// Landscape
-		XYZ landscapeLayer = new XYZ(
-				"Landscape",
+		XYZ landscapeLayer = new XYZ("Landscape",
 				new String[] {
 						"http://a.tile3.opencyclemap.org/landscape/${z}/${x}/${y}.png",
 						"http://b.tile3.opencyclemap.org/landscape/${z}/${x}/${y}.png",
@@ -201,7 +196,7 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 		previewItineraryLayer.setIsVisible(true);
 		allLayers.add(previewItineraryLayer);
 		map.addLayer(previewItineraryLayer);
-		
+
 		// Waypoint layer
 		VectorOptions vectorLayerOptions = new VectorOptions();
 		vectorLayerOptions.setDisplayInLayerSwitcher(false);
@@ -210,7 +205,7 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 		waypointLayer.setIsVisible(true);
 		map.addLayer(waypointLayer);
 		allLayers.add(waypointLayer);
-		
+
 		// Itinerary layer
 		itineraryLayer = new Vector("Itinerary", vectorLayerOptions);
 		itineraryLayer.setIsVisible(true);
@@ -220,7 +215,8 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 		// Pre-create POI layers
 		for (POILayerType layerType : POILayerType.values()) {
 			// Lazy-create a new layer
-			OpenLayersPOILayer poiLayer = new OpenLayersPOILayer(map, layerType);
+			OpenLayersPOILayer poiLayer = new OpenLayersPOILayer(map,
+					layerType);
 			poiLayers.put(layerType, poiLayer);
 			allLayers.add(poiLayer.getLayer());
 		}
@@ -236,8 +232,8 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 		dragFeatureOptions.onStart(new DragFeatureListener() {
 			@Override
 			public void onDragEvent(VectorFeature vectorFeature, Pixel pixel) {
-				if (!vectorFeature.getAttributes().getAttributeAsBoolean(
-						WAYPOINT_DRAGGABLE_KEY)) {
+				if (!vectorFeature.getAttributes()
+						.getAttributeAsBoolean(WAYPOINT_DRAGGABLE_KEY)) {
 					dragFeature.deactivate();
 					dragFeature.activate();
 				}
@@ -263,8 +259,8 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 		// Create departure/arrival waypoints
 		departureWaypoint = new OpenLayersWaypoint(waypointLayer, "departure",
 				true, PlannerResources.INSTANCE.flagmapDeparturePng(), 1.0);
-		arrivalWaypoint = new OpenLayersWaypoint(waypointLayer, "arrival",
-				true, PlannerResources.INSTANCE.flagmapArrivalPng(), 1.0);
+		arrivalWaypoint = new OpenLayersWaypoint(waypointLayer, "arrival", true,
+				PlannerResources.INSTANCE.flagmapArrivalPng(), 1.0);
 		popupMarker = new OpenLayersWaypoint(waypointLayer, "popup", false,
 				PlannerResources.INSTANCE.flagmapWaypointPng(), 1.0);
 
@@ -466,10 +462,10 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 			if (infoPopup != null) {
 				map.removePopup(infoPopup);
 			}
-			infoPopup = new FramedCloud("infoPopup", lonLat,
-					new Size(150, 100), wrapPopupHtml("instructions-popup",
-							"<h3>" + location.getAddress() + "</h3>"), null,
-					true);
+			infoPopup = new FramedCloud("infoPopup", lonLat, new Size(150, 100),
+					wrapPopupHtml("instructions-popup",
+							"<h3>" + location.getAddress() + "</h3>"),
+					null, true);
 			infoPopup.setAutoSize(true);
 			infoPopup.setPanMapIfOutOfView(true);
 			map.addPopup(infoPopup);
@@ -514,8 +510,9 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 			map.removePopup(infoPopup);
 		}
 		infoPopup = new FramedCloud("infoPopup", convertLonLat(location),
-				new Size(200, 200), wrapPopupHtml("instructions-popup",
-						instructionsHtml), null, true);
+				new Size(200, 200),
+				wrapPopupHtml("instructions-popup", instructionsHtml), null,
+				true);
 		infoPopup.setAutoSize(true);
 		infoPopup.setPanMapIfOutOfView(true);
 		map.addPopup(infoPopup);
@@ -544,12 +541,13 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 	}
 
 	@Override
-	public void updatePOIs(POISource source, java.util.Map<String, POIBean> pois) {
+	public void updatePOIs(POISource source,
+			java.util.Map<String, POIBean> pois) {
 		// Group POI by layers as a source can impact many layers
 		java.util.Map<POILayerType, java.util.Map<String, POIBean>> poisPerLayer = new HashMap<POILayerType, java.util.Map<String, POIBean>>();
 		for (POIBean poi : pois.values()) {
-			POILayerType layerType = POIUtils.mapPoiTypeToLayerType(poi
-					.getType());
+			POILayerType layerType = POIUtils
+					.mapPoiTypeToLayerType(poi.getType());
 			java.util.Map<String, POIBean> poisForLayer = poisPerLayer
 					.get(layerType);
 			if (poisForLayer == null) {
@@ -592,12 +590,12 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 	private void handleDrag(VectorFeature feature) {
 		if (feature.getAttributes().getAttributeAsString(WAYPOINT_TYPE_KEY)
 				.equals("departure")) {
-			mapListener.onStartPointSelected(convertLatLng(feature
-					.getCenterLonLat()));
+			mapListener.onStartPointSelected(
+					convertLatLng(feature.getCenterLonLat()));
 		} else if (feature.getAttributes()
 				.getAttributeAsString(WAYPOINT_TYPE_KEY).equals("arrival")) {
-			mapListener.onEndPointSelected(convertLatLng(feature
-					.getCenterLonLat()));
+			mapListener.onEndPointSelected(
+					convertLatLng(feature.getCenterLonLat()));
 		}
 	}
 
@@ -636,14 +634,14 @@ public class OpenLayersPlannerMapWidget extends Composite implements
 			map.removePopup(infoPopup);
 			infoPopup = null;
 		}
-		String popupContent = feature.getAttributes().getAttributeAsString(
-				POPUP_CONTENT_KEY);
-		String popupClass = feature.getAttributes().getAttributeAsString(
-				POPUP_CLASS_KEY);
+		String popupContent = feature.getAttributes()
+				.getAttributeAsString(POPUP_CONTENT_KEY);
+		String popupClass = feature.getAttributes()
+				.getAttributeAsString(POPUP_CLASS_KEY);
 		if (popupContent != null) {
 			infoPopup = new FramedCloud("infoPopup", feature.getCenterLonLat(),
-					new Size(200, 200),
-					wrapPopupHtml(popupClass, popupContent), null, true);
+					new Size(200, 200), wrapPopupHtml(popupClass, popupContent),
+					null, true);
 			infoPopup.setAutoSize(true);
 			infoPopup.setBorder("1px black solid");
 			infoPopup.setPanMapIfOutOfView(true);

@@ -52,15 +52,13 @@ public class ItineraryTimeLineWidget extends Composite {
 				timesPanel.resizeColumns(timesPanelColumns);
 				HTML roadTimeLabel = new HTML(secToString(legTravelTimeSec));
 				timesPanel.setWidget(0, timesPanelColumns - 1, roadTimeLabel);
-				String styleName = "timeline-"
-						+ FormatUtils.getCssClassNameFromTransportMode(roadLeg
-								.getMode()) + "-icon";
+				String styleName = "timeline-" + FormatUtils
+						.getCssClassNameFromTransportMode(roadLeg.getMode())
+						+ "-icon";
 				timesPanel.getCellFormatter().addStyleName(0,
 						timesPanelColumns - 1, styleName);
-				timesPanel
-						.getCellFormatter()
-						.getElement(0, timesPanelColumns - 1)
-						.getStyle()
+				timesPanel.getCellFormatter()
+						.getElement(0, timesPanelColumns - 1).getStyle()
 						.setWidth(legTravelTimeSec * 100 / totalTravelTimeSec,
 								Style.Unit.PCT);
 			} else if (leg.getTravelType() == TravelType.TRANSIT) {
@@ -75,12 +73,9 @@ public class ItineraryTimeLineWidget extends Composite {
 							waitTimeLabel);
 					timesPanel.getCellFormatter().addStyleName(0,
 							timesPanelColumns - 1, "timeline-wait-icon");
-					timesPanel
-							.getCellFormatter()
-							.getElement(0, timesPanelColumns - 1)
-							.getStyle()
-							.setWidth(
-									legWaitTimeSec * 100 / totalTravelTimeSec,
+					timesPanel.getCellFormatter()
+							.getElement(0, timesPanelColumns - 1).getStyle()
+							.setWidth(legWaitTimeSec * 100 / totalTravelTimeSec,
 									Style.Unit.PCT);
 				}
 				// Transit time scale
@@ -88,20 +83,17 @@ public class ItineraryTimeLineWidget extends Composite {
 				timesPanelColumns++;
 				timesPanel.resizeColumns(timesPanelColumns);
 				HTML transitTimeLabel = new HTML(secToString(legTravelTimeSec));
-				timesPanel
-						.setWidget(0, timesPanelColumns - 1, transitTimeLabel);
+				timesPanel.setWidget(0, timesPanelColumns - 1,
+						transitTimeLabel);
 				timesPanel.getCellFormatter().addStyleName(0,
 						timesPanelColumns - 1, "timeline-transit-icon");
-				String styleName = "timeline-"
-						+ FormatUtils
-								.getCssClassNameFromTransportMode(transitLeg
-										.getMode()) + "-icon";
+				String styleName = "timeline-" + FormatUtils
+						.getCssClassNameFromTransportMode(transitLeg.getMode())
+						+ "-icon";
 				timesPanel.getCellFormatter().addStyleName(0,
 						timesPanelColumns - 1, styleName);
-				timesPanel
-						.getCellFormatter()
-						.getElement(0, timesPanelColumns - 1)
-						.getStyle()
+				timesPanel.getCellFormatter()
+						.getElement(0, timesPanelColumns - 1).getStyle()
 						.setWidth(legTravelTimeSec * 100 / totalTravelTimeSec,
 								Style.Unit.PCT);
 			}

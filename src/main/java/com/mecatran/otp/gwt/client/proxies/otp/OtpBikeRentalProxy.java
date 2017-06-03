@@ -61,30 +61,31 @@ public class OtpBikeRentalProxy implements POISource {
 
 					@Override
 					public void onSuccess(OtpBikeStationsResponse stations) {
-						Map<String, POIBean> beans = new HashMap<>(stations
-								.getStations().length());
-						for (int i = 0; i < stations.getStations().length(); i++) {
+						Map<String, POIBean> beans = new HashMap<>(
+								stations.getStations().length());
+						for (int i = 0; i < stations.getStations()
+								.length(); i++) {
 							OtpBikeStation otpStation = stations.getStations()
 									.get(i);
 							BikeRentalStationBean poiStation = new BikeRentalStationBean();
 							poiStation.setId(otpStation.getId());
 							// Sometimes OTP station have no name, make sure
 							// they have one
-							poiStation.setName(otpStation.getName() == null ? "STATION #"
-									+ otpStation.getId()
+							poiStation.setName(otpStation.getName() == null
+									? "STATION #" + otpStation.getId()
 									: otpStation.getName());
-							poiStation.setHasRealTime(otpStation
-									.isRealTimeData());
-							poiStation.setBikesAvailable(otpStation
-									.getBikesAvailable());
-							poiStation.setSlotsAvailable(otpStation
-									.getSpacesAvailable());
-							poiStation.setTotalCapacity(otpStation
-									.getBikesAvailable()
-									+ otpStation.getSpacesAvailable());
+							poiStation.setHasRealTime(
+									otpStation.isRealTimeData());
+							poiStation.setBikesAvailable(
+									otpStation.getBikesAvailable());
+							poiStation.setSlotsAvailable(
+									otpStation.getSpacesAvailable());
+							poiStation.setTotalCapacity(
+									otpStation.getBikesAvailable()
+											+ otpStation.getSpacesAvailable());
 							poiStation.setLocation(new Wgs84LatLonBean(
-									otpStation.getLatitude(), otpStation
-											.getLongitude()));
+									otpStation.getLatitude(),
+									otpStation.getLongitude()));
 							beans.put(poiStation.getId(), poiStation);
 						}
 						for (POIListener listener : listeners) {

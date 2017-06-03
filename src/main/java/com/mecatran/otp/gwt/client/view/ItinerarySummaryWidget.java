@@ -57,11 +57,11 @@ public class ItinerarySummaryWidget extends Composite {
 		departureAndArrivalPanel.addStyleName("itinerary-addresses-panel");
 		departureAndButtonsPanel.add(departureAndArrivalPanel);
 		departureAndButtonsPanel.setCellWidth(departureAndArrivalPanel, "100%");
-		Label departureTimeLabel = new Label(FormatUtils.formatTime(itinerary
-				.getDepartureTime()));
+		Label departureTimeLabel = new Label(
+				FormatUtils.formatTime(itinerary.getDepartureTime()));
 		departureTimeLabel.addStyleName("itinerary-departure-time");
-		Label arrivalTimeLabel = new Label(FormatUtils.formatTime(itinerary
-				.getArrivalTime()));
+		Label arrivalTimeLabel = new Label(
+				FormatUtils.formatTime(itinerary.getArrivalTime()));
 		arrivalTimeLabel.addStyleName("itinerary-arrival-time");
 		String[] formattedAddresses = FormatUtils.formatAddresses(
 				itinerary.getStartAddress(), itinerary.getEndAddress());
@@ -91,16 +91,16 @@ public class ItinerarySummaryWidget extends Composite {
 				HasHorizontalAlignment.ALIGN_RIGHT);
 
 		// Close button
-		PushButton closeButton = new PushButton(new Image(
-				PlannerResources.INSTANCE.closeButtonPng()));
+		PushButton closeButton = new PushButton(
+				new Image(PlannerResources.INSTANCE.closeButtonPng()));
 		closeButton.addStyleName("itinerary-close-button");
 		closeButton.addClickHandler(closeHandler);
 		buttonsPanel.add(closeButton);
 
 		// Pin button
-		pinButton = new ToggleButton(new Image(
-				PlannerResources.INSTANCE.noFavoritePng()), new Image(
-				PlannerResources.INSTANCE.favoritePng()));
+		pinButton = new ToggleButton(
+				new Image(PlannerResources.INSTANCE.noFavoritePng()),
+				new Image(PlannerResources.INSTANCE.favoritePng()));
 		pinButton.addStyleName("itinerary-pin-button");
 		pinButton.addClickHandler(pinHandler);
 		buttonsPanel.add(pinButton);
@@ -116,10 +116,10 @@ public class ItinerarySummaryWidget extends Composite {
 		VerticalPanel dateAndDurationPanel = new VerticalPanel();
 		dateAndDurationPanel.addStyleName("itinerary-date-duration-panel");
 		timesAndSummaryPanel.add(dateAndDurationPanel);
-		String departureDate = FormatUtils.formatDate(itinerary
-				.getDepartureTime());
-		String duration = FormatUtils.formatDuration(itinerary
-				.getDurationSeconds());
+		String departureDate = FormatUtils
+				.formatDate(itinerary.getDepartureTime());
+		String duration = FormatUtils
+				.formatDuration(itinerary.getDurationSeconds());
 		Label departureDateLabel = new Label(departureDate);
 		departureDateLabel.addStyleName("itinerary-departure-date");
 		dateAndDurationPanel.add(departureDateLabel);
@@ -138,7 +138,8 @@ public class ItinerarySummaryWidget extends Composite {
 
 		// Links (show details, print)
 		HorizontalPanel linksPanel = new HorizontalPanel();
-		showHideDetailsLink = new Anchor(I18nUtils.tr("show.itinerary.details"));
+		showHideDetailsLink = new Anchor(
+				I18nUtils.tr("show.itinerary.details"));
 		showHideDetailsLink.addStyleName("itinerary-details-show-hide");
 		linksPanel.add(showHideDetailsLink);
 		printLink = new Anchor(I18nUtils.tr("print.itinerary"));
@@ -158,8 +159,7 @@ public class ItinerarySummaryWidget extends Composite {
 	}
 
 	public void setOpened(boolean opened) {
-		showHideDetailsLink.setText(I18nUtils
-				.tr(opened ? "hide.itinerary.details"
-						: "show.itinerary.details"));
+		showHideDetailsLink.setText(I18nUtils.tr(
+				opened ? "hide.itinerary.details" : "show.itinerary.details"));
 	}
 }
