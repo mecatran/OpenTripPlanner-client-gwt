@@ -202,16 +202,17 @@ public class PrintWidgetWindowImpl implements PrintWidget {
 	 * @return
 	 */
 	public static native BodyElement openWindow(String printLabel,
-			String cssContent) /*-{
-								var win = window.open("", "win", "width=940,height=400,status=1,resizeable=1,scrollbars=1");
-								win.document.open("text/html", "replace");
-								win.document.write("<html><head><style>\n" + cssContent
-								+ "\n</style></head><body><div><button onclick='window.print()'>" + printLabel
-								+ "</button></div><div id='printarea'/></body></html>");
-								win.document.close();
-								win.focus();
-								return win.document.body;
-								}-*/;
+			String cssContent)
+	/*-{
+        var win = window.open("", "win", "width=940,height=400,status=1,resizeable=1,scrollbars=1");
+        win.document.open("text/html", "replace");
+        win.document.write("<html><head><style>\n" + cssContent
+                + "\n</style></head><body><div><button onclick='window.print()'>" + printLabel
+                + "</button></div><div id='printarea'/></body></html>");
+        win.document.close();
+        win.focus();
+        return win.document.body;
+	}-*/;
 
 	private Widget getRoadDetails(ItineraryRoadLegBean leg) {
 		FlowPanel line = new FlowPanel();
